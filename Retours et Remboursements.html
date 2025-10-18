@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retours et Remboursements - Brivaro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-red: #E91C1C;
+            --primary-orange: #FF6600;
+            --dark-text: #333333;
+            --medium-gray: #666666;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+            --accent-blue: #0066CC;
+            --discount-green: #388E3C;
+            --border-gray: #E0E0E0;
+            --card-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --header-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--light-gray);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+        }
+
+        /* Top Banner */
+        .top-banner {
+            background-color: var(--dark-text);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 0.8rem;
+        }
+
+        .top-banner .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--white);
+            padding: 12px 0;
+            box-shadow: var(--header-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .custom-logo {
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-logo img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .logo-badge {
+            background: var(--primary-red);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 5px;
+            border-radius: 3px;
+            transform: rotate(15deg);
+            margin-left: 5px;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 45px 12px 16px;
+            border: 2px solid var(--border-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-orange);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark-text);
+            font-size: 0.9rem;
+        }
+
+        .header-action i {
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+
+        /* Main Navigation */
+        .main-nav {
+            background-color: var(--white);
+            padding: 12px 0;
+            border-top: 1px solid var(--border-gray);
+            border-bottom: 1px solid var(--border-gray);
+            margin-bottom: 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-categories {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-categories a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-categories a.active {
+            color: var(--primary-orange);
+            font-weight: 700;
+        }
+
+        .nav-categories a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-orange);
+            transition: width 0.3s;
+        }
+
+        .nav-categories a:hover:after, .nav-categories a.active:after {
+            width: 100%;
+        }
+
+        .nav-promo {
+            background: var(--primary-red);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(to right, #2196F3, #21CBF3);
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .page-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .page-header-icon {
+            font-size: 4rem;
+            opacity: 0.8;
+        }
+
+        /* Returns Content */
+        .returns-content {
+            margin-bottom: 40px;
+        }
+
+        .returns-intro {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .returns-intro h2 {
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .returns-intro p {
+            margin-bottom: 15px;
+            color: var(--medium-gray);
+            line-height: 1.8;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Process Section */
+        .process-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+        }
+
+        .process-section h2 {
+            color: var(--primary-orange);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .process-steps:before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--border-gray);
+            z-index: 1;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        .step-number {
+            background-color: var(--primary-orange);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .step-text {
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        /* Conditions Section */
+        .conditions-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+        }
+
+        .conditions-section h2 {
+            color: var(--primary-orange);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .conditions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .condition-card {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 25px;
+        }
+
+        .condition-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--dark-text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .condition-title i {
+            color: var(--primary-orange);
+        }
+
+        .condition-list {
+            list-style: none;
+            color: var(--medium-gray);
+        }
+
+        .condition-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .condition-list li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary-orange);
+            font-weight: bold;
+        }
+
+        /* Refund Methods */
+        .refund-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+        }
+
+        .refund-section h2 {
+            color: var(--primary-orange);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .refund-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .refund-method {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .refund-method:hover {
+            transform: translateY(-5px);
+        }
+
+        .refund-icon {
+            background-color: var(--primary-orange);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.5rem;
+        }
+
+        .refund-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--dark-text);
+        }
+
+        .refund-description {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        .refund-timing {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-gray);
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+        }
+
+        .faq-section h2 {
+            color: var(--primary-orange);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-gray);
+            padding-bottom: 15px;
+        }
+
+        .faq-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .faq-answer {
+            margin-top: 10px;
+            color: var(--medium-gray);
+            display: none;
+            padding: 0 0 15px 0;
+            line-height: 1.7;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+
+        .faq-question.active + .faq-answer {
+            display: block;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(to right, #FF6600, #FF9D4D);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .cta-section p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            background-color: white;
+            color: var(--primary-orange);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--light-gray);
+            transform: translateY(-2px);
+        }
+
+        .cta-btn.outline {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-btn.outline:hover {
+            background-color: white;
+            color: var(--primary-orange);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--white);
+            padding: 50px 0 0;
+            margin-top: 50px;
+            border-top: 1px solid var(--border-gray);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: var(--dark-text);
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h4:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-orange);
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--medium-gray);
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-orange);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-gray);
+            margin-top: 50px;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .conditions-grid, .refund-methods {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                width: 100%;
+                max-width: none;
+                margin: 10px 0;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-categories {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .page-header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .process-steps:before {
+                display: none;
+            }
+            
+            .returns-intro, .process-section, .conditions-section, .refund-section, .faq-section {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-actions {
+                gap: 15px;
+            }
+            
+            .conditions-grid, .refund-methods {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section {
+                padding: 40px 20px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="container">
+            <span>Francais</span>
+            <span>Brivaro®</span>
+            <span>Lege cle at anal</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="custom-logo">
+                        <img src="B r i v a r o.png" alt="MON MAGASIN">
+                    </div>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Rechercher des produits...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="header-actions">
+                    <a href="#" class="header-action">
+                        <i class="fas fa-user"></i>
+                        <span>Compte</span>
+                    </a>
+                    <a href="#" class="header-action">
+                        <i class="fas fa-heart"></i>
+                        <span>Favoris</span>
+                    </a>
+                    <a href="#" class="header-action">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Panier</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-container">
+                <div class="nav-categories">
+                    <a href="Supermarket.html">Supermarket</a>
+                    <a href="Mode.html">Santé & Beauté</a>
+                    <a href="Maison & Cuisine.html">Maison & Cuisine</a>
+                    <a href="telephone.html">Téléphones</a>
+                    <a href="Ordinateurs.html">Ordinateurs</a>
+                    <a href="Électronique.html">Électronique</a>
+                    
+                </div>
+                <div class="nav-promo">
+                    <i class="fas fa-gift"></i> JOURNEE SPECIALE
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="page-header-content">
+                <div>
+                    <h1 class="page-title">Retours et Remboursements</h1>
+                    <p class="page-subtitle">Politique flexible et processus simplifié</p>
+                </div>
+                <div class="page-header-icon">
+                    <i class="fas fa-undo-alt"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Returns Content -->
+        <div class="returns-content">
+            <!-- Intro Section -->
+            <section class="returns-intro">
+                <h2>Notre Politique de Retour</h2>
+                <p>Chez Brivaro, nous nous engageons à garantir votre satisfaction totale. Si pour une raison quelconque vous n'êtes pas complètement satisfait de votre achat, notre politique de retour flexible vous permet de retourner les produits dans un délai de 30 jours.</p>
+                <p>Nous avons simplifié le processus de retour pour qu'il soit aussi facile et transparent que possible, avec des remboursements rapides et plusieurs options de retour.</p>
+            </section>
+
+            <!-- Process Section -->
+            <section class="process-section">
+                <h2>Processus de Retour en 4 Étapes</h2>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Demande de retour</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Préparation du colis</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Envoi du retour</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <div class="step-text">Remboursement</div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; color: var(--medium-gray);">
+                    <p>Notre processus de retour est conçu pour être simple et efficace. La plupart des remboursements sont traités dans un délai de 5 à 7 jours ouvrables après réception de votre retour.</p>
+                </div>
+            </section>
+
+            <!-- Conditions Section -->
+            <section class="conditions-section">
+                <h2>Conditions de Retour</h2>
+                
+                <div class="conditions-grid">
+                    <div class="condition-card">
+                        <h3 class="condition-title"><i class="fas fa-check-circle"></i> Produits Éligibles</h3>
+                        <ul class="condition-list">
+                            <li>Produits non utilisés et dans leur emballage d'origine</li>
+                            <li>Articles avec toutes les étiquettes et accessoires</li>
+                            <li>Produits défectueux ou non conformes</li>
+                            <li>Articles endommagés pendant la livraison</li>
+                            <li>Erreur de notre part dans la commande</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="condition-card">
+                        <h3 class="condition-title"><i class="fas fa-times-circle"></i> Produits Non Éligibles</h3>
+                        <ul class="condition-list">
+                            <li>Produits d'hygiène personnelle descellés</li>
+                            <li>Logiciels et jeux vidéo descellés</li>
+                            <li>Produits personnalisés ou sur mesure</li>
+                            <li>Articles périmés ou avec date de validité dépassée</li>
+                            <li>Produits endommagés par une mauvaise utilisation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="condition-card">
+                        <h3 class="condition-title"><i class="fas fa-clock"></i> Délais de Retour</h3>
+                        <ul class="condition-list">
+                            <li>Délai standard: 30 jours à partir de la réception</li>
+                            <li>Produits soldés: 15 jours à partir de la réception</li>
+                            <li>Délai étendu à 60 jours pour les membres Premium</li>
+                            <li>Délai de 1 an pour les produits défectueux sous garantie</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="condition-card">
+                        <h3 class="condition-title"><i class="fas fa-box"></i> Condition des Produits</h3>
+                        <ul class="condition-list">
+                            <li>Emballage d'origine intact et non endommagé</li>
+                            <li>Tous les accessoires et documentation inclus</li>
+                            <li>Aucun signe d'utilisation ou d'installation</li>
+                            <li>Étiquettes et emballages protecteurs intacts</li>
+                            <li>Preuve d'achat fournie (facture ou bon de commande)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Refund Methods Section -->
+            <section class="refund-section">
+                <h2>Options de Remboursement</h2>
+                
+                <div class="refund-methods">
+                    <div class="refund-method">
+                        <div class="refund-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <h3 class="refund-title">Remboursement Carte Bancaire</h3>
+                        <p class="refund-description">Remboursement directement sur votre carte bancaire originale</p>
+                        <div class="refund-timing">Délai: 5-7 jours ouvrables</div>
+                    </div>
+                    
+                    <div class="refund-method">
+                        <div class="refund-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <h3 class="refund-title">Portefeuille Brivaro</h3>
+                        <p class="refund-description">Crédit instantané sur votre compte Brivaro pour vos achats futurs</p>
+                        <div class="refund-timing">Délai: Immédiat</div>
+                    </div>
+                    
+                    <div class="refund-method">
+                        <div class="refund-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <h3 class="refund-title">Échange Produit</h3>
+                        <p class="refund-description">Échange contre un autre produit de valeur équivalente ou supérieure</p>
+                        <div class="refund-timing">Traitement: 24-48 heures</div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <p style="color: var(--medium-gray);">Les frais de retour initiaux ne sont pas remboursés, sauf en cas d'erreur de notre part ou de produit défectueux.</p>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <h2>Questions Fréquentes</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Comment initier un retour?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pour initier un retour, connectez-vous à votre compte Brivaro, allez dans la section "Mes commandes", sélectionnez la commande concernée et cliquez sur "Demander un retour". Suivez les instructions pour compléter votre demande.</p>
+                        <p>Vous pouvez également contacter notre service client au +212 5 22 33 44 55 ou par email à retours@brivaro.ma.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Qui paie les frais de retour?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Les frais de retour sont à la charge du client, sauf dans les cas suivants:</p>
+                        <ul>
+                            <li>Produit défectueux ou non conforme</li>
+                            <li>Erreur de livraison (mauvais produit ou quantité)</li>
+                            <li>Article endommagé pendant le transport</li>
+                            <li>Membres Brivaro Premium (frais de retour gratuits)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Combien de temps pour recevoir mon remboursement?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Le délai de remboursement dépend de la méthode choisie:</p>
+                        <ul>
+                            <li>Portefeuille Brivaro: Immédiat après traitement du retour</li>
+                            <li>Carte bancaire: 5-7 jours ouvrables après traitement</li>
+                            <li>Virement bancaire: 7-10 jours ouvrables</li>
+                        </ul>
+                        <p>Le traitement du retour prend généralement 1-2 jours ouvrables après réception dans notre entrepôt.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Que faire si mon produit est défectueux?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Si vous recevez un produit défectueux, contactez-nous immédiatement au +212 5 22 33 44 55. Nous organiserons l'enlèvement à domicile à nos frais et vous proposerons:</p>
+                        <ul>
+                            <li>Un remplacement immédiat si disponible</li>
+                            <li>Une réparation sous garantie</li>
+                            <li>Un remboursement complet</li>
+                        </ul>
+                        <p>La garantie légale s'applique conformément à la législation marocaine.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h2>Besoin d'aide pour un retour?</h2>
+                <p>Notre équipe de support client est disponible pour vous aider avec tout problème de retour ou remboursement</p>
+                <div class="cta-buttons">
+                    <button class="cta-btn">Initier un retour en ligne</button>
+                    <button class="cta-btn outline">Contacter le support</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Besoin D'aide</h4>
+                    <a href="Contactez-nous.html">Contactez-nous</a>
+                    <a href="FAQ.html">FAQ</a>
+                    <a href="Livraison et Paiement.html">Livraison et Paiement</a>
+                    <a href="Retours et Remboursements.html">Retours et Remboursements</a>
+                    <a href="Service Client.html">Service Client</a>
+                </div>
+                <div class="footer-section">
+                    <h4>À propos de Brivaro</h4>
+                    <a href="À propos de nous.html">À propos de nous</a>
+                    <a href="Carrières.html">Carrières</a>
+                    <a href="Brivaro Express.html">Brivaro Express</a>
+                    <a href="Terms and Conditions.html">Terms and Conditions</a>
+                    <a href="Privacy Policy.html">Privacy Policy</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Paiement et Livraison</h4>
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        <i class="fab fa-cc-visa" style="font-size: 1.8rem; color: #555;"></i>
+                        <i class="fab fa-cc-mastercard" style="font-size: 1.8rem; color: #555;"></i>
+                        <i class="fab fa-cc-paypal" style="font-size: 1.8rem; color: #555;"></i>
+                    </div>
+                    <a href="Méthodes de paiement.html">Méthodes de paiement</a>
+                    <a href="Options de livraison.html">Options de livraison</a>
+                    <a href="Suivi de commande.html">Suivi de commande</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Suivez-nous</h4>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633z"/></svg></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Brivaro. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+     <script>
+        // Countdown timer
+        function updateCountdown() {
+            const countdownElements = document.querySelectorAll('.countdown-timer');
+            countdownElements.forEach(el => {
+                // Simulate countdown - in a real implementation, calculate actual time remaining
+                const parts = el.textContent.split(':');
+                let hours = parseInt(parts[0]);
+                let minutes = parseInt(parts[1]);
+                let seconds = parseInt(parts[2]);
+                
+                seconds--;
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                    if (minutes < 0) {
+                        minutes = 59;
+                        hours--;
+                        if (hours < 0) {
+                            hours = 23;
+                        }
+                    }
+                }
+                
+                el.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                // Add pulse animation when time is running low
+                if (hours === 0 && minutes < 5) {
+                    el.classList.add('pulse');
+                } else {
+                    el.classList.remove('pulse');
+                }
+            });
+        }
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        
+        // Product card hover effects
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 6px 15px rgba(0,0,0,0.1)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+            });
+        });
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('MONMAGASIN website loaded successfully');
+        });
+    </script>
+</body>
+</html>

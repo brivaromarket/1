@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Brivaro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-red: #E91C1C;
+            --primary-orange: #FF6600;
+            --dark-text: #333333;
+            --medium-gray: #666666;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+            --accent-blue: #0066CC;
+            --discount-green: #388E3C;
+            --border-gray: #E0E0E0;
+            --card-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --header-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--light-gray);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+        }
+
+        /* Top Banner */
+        .top-banner {
+            background-color: var(--dark-text);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 0.8rem;
+        }
+
+        .top-banner .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--white);
+            padding: 12px 0;
+            box-shadow: var(--header-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .custom-logo {
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-logo img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .logo-badge {
+            background: var(--primary-red);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 5px;
+            border-radius: 3px;
+            transform: rotate(15deg);
+            margin-left: 5px;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 45px 12px 16px;
+            border: 2px solid var(--border-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-orange);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark-text);
+            font-size: 0.9rem;
+        }
+
+        .header-action i {
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+
+        /* Main Navigation */
+        .main-nav {
+            background-color: var(--white);
+            padding: 12px 0;
+            border-top: 1px solid var(--border-gray);
+            border-bottom: 1px solid var(--border-gray);
+            margin-bottom: 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-categories {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-categories a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-categories a.active {
+            color: var(--primary-orange);
+            font-weight: 700;
+        }
+
+        .nav-categories a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-orange);
+            transition: width 0.3s;
+        }
+
+        .nav-categories a:hover:after, .nav-categories a.active:after {
+            width: 100%;
+        }
+
+        .nav-promo {
+            background: var(--primary-red);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(to right, #2196F3, #21CBF3);
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .page-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .page-header-icon {
+            font-size: 4rem;
+            opacity: 0.8;
+        }
+
+        /* FAQ Content */
+        .faq-content {
+            margin-bottom: 40px;
+        }
+
+        .faq-search {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid var(--border-gray);
+            border-radius: 30px;
+            font-size: 1rem;
+        }
+
+        .search-container button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-orange);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .faq-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .faq-category {
+            background-color: var(--white);
+            border: 2px solid var(--border-gray);
+            border-radius: 30px;
+            padding: 12px 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .faq-category:hover, .faq-category.active {
+            background-color: var(--primary-orange);
+            color: white;
+            border-color: var(--primary-orange);
+        }
+
+        .faq-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .faq-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-section h2 {
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .faq-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-orange);
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-gray);
+            padding-bottom: 15px;
+        }
+
+        .faq-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .faq-answer {
+            margin-top: 10px;
+            color: var(--medium-gray);
+            display: none;
+            padding: 0 0 15px 0;
+            line-height: 1.7;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+
+        .faq-question.active + .faq-answer {
+            display: block;
+        }
+
+        .contact-promo {
+            background: linear-gradient(to right, #FF6600, #FF9D4D);
+            color: white;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .contact-promo h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .contact-promo p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .contact-btn {
+            background-color: white;
+            color: var(--primary-orange);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .contact-btn:hover {
+            background-color: var(--light-gray);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--white);
+            padding: 50px 0 0;
+            margin-top: 50px;
+            border-top: 1px solid var(--border-gray);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: var(--dark-text);
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h4:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-orange);
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--medium-gray);
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-orange);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-gray);
+            margin-top: 50px;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                width: 100%;
+                max-width: none;
+                margin: 10px 0;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-categories {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .page-header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .faq-categories {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+            
+            .faq-section {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-actions {
+                gap: 15px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-promo {
+                padding: 25px 15px;
+            }
+            
+            .faq-search {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="container">
+            <span>Francais</span>
+            <span>Brivaro®</span>
+            <span>Lege cle at anal</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="custom-logo">
+                        <img src="B r i v a r o.png" alt="MON MAGASIN">
+                    </div>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Rechercher des produits...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="header-actions">
+                    <a href="#" class="header-action">
+                        <i class="fas fa-user"></i>
+                        <span>Compte</span>
+                    </a>
+                    <a href="#" class="header-action">
+                        <i class="fas fa-heart"></i>
+                        <span>Favoris</span>
+                    </a>
+                    <a href="#" class="header-action">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Panier</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-container">
+                <div class="nav-categories">
+                    <a href="Supermarket.html">Supermarket</a>
+                    <a href="Mode.html">Santé & Beauté</a>
+                    <a href="Maison & Cuisine.html">Maison & Cuisine</a>
+                    <a href="telephone.html">Téléphones</a>
+                    <a href="Ordinateurs.html">Ordinateurs</a>
+                    <a href="Électronique.html">Électronique</a>
+                </div>
+                <div class="nav-promo">
+                    <i class="fas fa-gift"></i> JOURNEE SPECIALE
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="page-header-content">
+                <div>
+                    <h1 class="page-title">Foire Aux Questions</h1>
+                    <p class="page-subtitle">Trouvez des réponses à vos questions fréquentes</p>
+                </div>
+                <div class="page-header-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Content -->
+        <div class="faq-content">
+            <!-- FAQ Search -->
+            <div class="faq-search">
+                <h2>Comment pouvons-nous vous aider?</h2>
+                <div class="search-container">
+                    <input type="text" placeholder="Rechercher une question...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+
+            <!-- FAQ Categories -->
+            <div class="faq-categories">
+                <div class="faq-category active">Toutes les questions</div>
+                <div class="faq-category">Commandes</div>
+                <div class="faq-category">Livraison</div>
+                <div class="faq-category">Paiement</div>
+                <div class="faq-category">Retours</div>
+                <div class="faq-category">Compte</div>
+                <div class="faq-category">Produits</div>
+            </div>
+
+            <!-- Commandes Section -->
+            <section class="faq-section">
+                <h2>Commandes</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Comment passer une commande?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pour passer une commande sur Brivaro, suivez ces étapes simples :</p>
+                        <ol>
+                            <li>Parcourez nos catégories de produits et ajoutez les articles désirés à votre panier</li>
+                            <li>Cliquez sur l'icône du panier en haut à droite</li>
+                            <li>Vérifiez les articles dans votre panier et cliquez sur "Passer la commande"</li>
+                            <li>Connectez-vous à votre compte ou créez-en un nouveau</li>
+                            <li>Renseignez votre adresse de livraison et choisissez votre mode de livraison</li>
+                            <li>Sélectionnez votre méthode de paiement et confirmez la commande</li>
+                        </ol>
+                        <p>Vous recevrez un email de confirmation une fois votre commande validée.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Comment modifier ou annuler une commande?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Vous pouvez modifier ou annuler votre commande dans les 30 minutes suivant sa validation. Pour ce faire :</p>
+                        <ol>
+                            <li>Connectez-vous à votre compte Brivaro</li>
+                            <li>Allez dans la section "Mes commandes"</li>
+                            <li>Cliquez sur la commande que vous souhaitez modifier ou annuler</li>
+                            <li>Si la commande est encore modifiable, vous verrez les options correspondantes</li>
+                        </ol>
+                        <p>Après ce délai, veuillez contacter notre service client au +212 5 22 33 44 55 ou par email à support@brivaro.ma. Nous ferons de notre mieux pour répondre à votre demande.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Comment suivre ma commande?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pour suivre votre commande :</p>
+                        <ol>
+                            <li>Connectez-vous à votre compte Brivaro</li>
+                            <li>Allez dans la section "Mes commandes"</li>
+                            <li>Cliquez sur la commande que vous souhaitez suivre</li>
+                            <li>Vous verrez le statut actuel de votre commande et un numéro de suivi si elle a été expédiée</li>
+                        </ol>
+                        <p>Vous recevrez également des emails de notification aux étapes importantes de votre commande (confirmation, expédition, livraison).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Livraison Section -->
+            <section class="faq-section">
+                <h2>Livraison</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quels sont les délais de livraison?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Les délais de livraison varient selon votre localisation et le mode de livraison choisi :</p>
+                        <ul>
+                            <li><strong>Casablanca :</strong> 24-48 heures (livraison express disponible en 4-6 heures)</li>
+                            <li><strong>Autres villes principales :</strong> 2-3 jours ouvrables</li>
+                            <li><strong>Zones rurales :</strong> 3-5 jours ouvrables</li>
+                        </ul>
+                        <p>Les commandes passées avant 14h sont généralement traitées le même jour. Les commandes passées le weekend seront traitées le lundi suivant.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quels sont les frais de livraison?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nos frais de livraison dépendent du montant de votre commande et de votre localisation :</p>
+                        <ul>
+                            <li><strong>Commandes de plus de 499 Dhs :</strong> Livraison standard gratuite</li>
+                            <li><strong>Commandes de moins de 499 Dhs :</strong> 29 Dhs pour la livraison standard</li>
+                            <li><strong>Livraison express :</strong> 49 Dhs (disponible uniquement dans certaines zones)</li>
+                        </ul>
+                        <p>Les frais exacts seront calculés lors du passage de commande en fonction de votre adresse de livraison.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Que faire si je suis absent lors de la livraison?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Si vous êtes absent lors du passage du livreur :</p>
+                        <ol>
+                            <li>Le livreur tentera de vous contacter par téléphone</li>
+                            <li>Si impossible de vous joindre, un avis de passage sera déposé</li>
+                            <li>Votre colis sera disponible au point relais le plus proche pendant 5 jours ouvrables</li>
+                            <li>Vous recevrez un SMS avec les instructions pour récupérer votre colis</li>
+                        </ol>
+                        <p>Après 5 jours, le colis sera retourné à notre entrepôt et des frais de relivraison pourront s'appliquer.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Paiement Section -->
+            <section class="faq-section">
+                <h2>Paiement</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quels modes de paiement acceptez-vous?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous acceptons les modes de paiement suivants :</p>
+                        <ul>
+                            <li><strong>Cartes de crédit/débit :</strong> Visa, MasterCard</li>
+                            <li><strong>Paiement à la livraison :</strong> Espèces ou carte bancaire</li>
+                            <li><strong>Virement bancaire :</strong> Disponible pour les commandes supérieures à 1000 Dhs</li>
+                            <li><strong>Portefeuille électronique :</strong> Brivaro Wallet (rechargeable)</li>
+                            <li><strong>Paiement en plusieurs fois :</strong> Disponible pour les commandes supérieures à 2000 Dhs</li>
+                        </ul>
+                        <p>Tous les paiements en ligne sont sécurisés par un cryptage SSL de haute qualité.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Mon paiement a été refusé, que faire?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Si votre paiement a été refusé, voici quelques solutions :</p>
+                        <ol>
+                            <li>Vérifiez que les informations de votre carte sont correctes (numéro, date d'expiration, cryptogramme)</li>
+                            <li>Assurez-vous que le solde de votre carte est suffisant</li>
+                            <li>Contactez votre banque pour vous assurer que les paiements en ligne sont autorisés</li>
+                            <li>Essayez une autre carte ou mode de paiement</li>
+                        </ol>
+                        <p>Si le problème persiste, contactez notre service client au +212 5 22 33 44 55 pour obtenir de l'aide.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Est-ce que les paiements sont sécurisés?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolument. La sécurité de vos informations financières est notre priorité :</p>
+                        <ul>
+                            <li>Notre site utilise un cryptage SSL 256 bits pour toutes les transactions</li>
+                            <li>Nous ne stockons pas les informations de votre carte bancaire sur nos serveurs</li>
+                            <li>Les paiements sont traités par des prestataires de paiement certifiés PCI DSS</li>
+                            <li>Nous utilisons des systèmes de détection de fraude avancés</li>
+                        </ul>
+                        <p>Vous pouvez effectuer vos achats en toute confiance sur Brivaro.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Promo -->
+            <div class="contact-promo">
+                <h2>Vous ne trouvez pas de réponse à votre question?</h2>
+                <p>Notre équipe de support client est disponible 7j/7 pour vous aider</p>
+                <button class="contact-btn">Contactez-nous</button>
+            </div>
+
+            <!-- Retours Section -->
+            <section class="faq-section">
+                <h2>Retours et Remboursements</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quelle est votre politique de retour?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Notre politique de retour vous permet de retourner tout article dans les 14 jours suivant la réception :</p>
+                        <ul>
+                            <li>Les articles doivent être dans leur état d'origine, non utilisés et dans leur emballage d'origine</li>
+                            <li>Les produits électriques doivent être complets avec tous les accessoires et documentation</li>
+                            <li>Certains articles ne sont pas éligibles au retour (produits d'hygiène personnelle, logiciels ouverts, etc.)</li>
+                        </ul>
+                        <p>Pour initier un retour, connectez-vous à votre compte et accédez à la section "Mes commandes".</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Combien de temps pour recevoir mon remboursement?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Une fois que nous aurons reçu et inspecté votre retour :</p>
+                        <ul>
+                            <li>Les remboursements par carte bancaire sont traités dans un délai de 5-7 jours ouvrables</li>
+                            <li>Les remboursements en espèces ou par virement sont traités dans un délai de 3-5 jours ouvrables</li>
+                            <li>Vous recevrez un email de confirmation une fois le remboursement initié</li>
+                        </ul>
+                        <p>Le temps que le remboursement apparaisse sur votre compte dépend de votre banque et peut prendre jusqu'à 10 jours supplémentaires.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Besoin D'aide</h4>
+                     <a href="Contactez-nous.html">Contactez-nous</a>
+                    <a href="FAQ.html">FAQ</a>
+                    <a href="Livraison et Paiement.html">Livraison et Paiement</a>
+                    <a href="Retours et Remboursements.html">Retours et Remboursements</a>
+                    <a href="Service Client.html">Service Client</a>
+                </div>
+                <div class="footer-section">
+                    <h4>À propos de Brivaro</h4>
+                    <a href="À propos de nous.html">À propos de nous</a>
+                    <a href="Carrières.html">Carrières</a>
+                    <a href="Brivaro Express.html">Brivaro Express</a>
+                    <a href="Terms and Conditions.html">Terms and Conditions</a>
+                    <a href="Privacy Policy.html">Privacy Policy</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Paiement et Livraison</h4>
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        <i class="fab fa-cc-visa" style="font-size: 1.8rem; color: #555;"></i>
+                        <i class="fab fa-cc-mastercard" style="font-size: 1.8rem; color: #555;"></i>
+                        <i class="fab fa-cc-paypal" style="font-size: 1.8rem; color: #555;"></i>
+                    </div>
+                   <a href="Méthodes de paiement.html">Méthodes de paiement</a>
+                    <a href="Options de livraison.html">Options de livraison</a>
+                    <a href="Suivi de commande.html">Suivi de commande</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Suivez-nous</h4>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633z"/></svg></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Brivaro. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ toggle functionality
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+
+        // FAQ category filter
+        const faqCategories = document.querySelectorAll('.faq-category');
+        const faqSections = document.querySelectorAll('.faq-section');
+        
+        faqCategories.forEach(category => {
+            category.addEventListener('click', function() {
+                // Remove active class from all categories
+                faqCategories.forEach(cat => cat.classList.remove('active'));
+                
+                // Add active class to clicked category
+                this.classList.add('active');
+                
+                const categoryName = this.textContent.trim();
+                
+                if (categoryName === "Toutes les questions") {
+                    faqSections.forEach(section => {
+                        section.style.display = 'block';
+                    });
+                } else {
+                    faqSections.forEach(section => {
+                        if (section.querySelector('h2').textContent === categoryName) {
+                            section.style.display = 'block';
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        // FAQ search functionality
+        const searchInput = document.querySelector('.search-container input');
+        searchInput.addEventListener('keyup', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            faqQuestions.forEach(question => {
+                const questionText = question.textContent.toLowerCase();
+                const faqItem = question.parentElement;
+                
+                if (questionText.includes(searchTerm)) {
+                    faqItem.style.display = 'block';
+                    // Open the question if it matches search
+                    question.classList.add('active');
+                    question.nextElementSibling.style.display = 'block';
+                } else {
+                    faqItem.style.display = 'none';
+                }
+            });
+        });
+
+        // Contact button functionality
+        const contactBtn = document.querySelector('.contact-btn');
+        contactBtn.addEventListener('click', function() {
+            alert('Redirection vers la page de contact...');
+            // In a real implementation, this would redirect to the contact page
+            // window.location.href = 'contact.html';
+        });
+    </script>
+</body>
+</html>

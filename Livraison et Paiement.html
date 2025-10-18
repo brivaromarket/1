@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement et Livraison - Brivaro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-red: #E91C1C;
+            --primary-orange: #FF6600;
+            --dark-text: #333333;
+            --medium-gray: #666666;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+            --accent-blue: #0066CC;
+            --discount-green: #388E3C;
+            --border-gray: #E0E0E0;
+            --card-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --header-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--light-gray);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+        }
+
+        /* Top Banner */
+        .top-banner {
+            background-color: var(--dark-text);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 0.8rem;
+        }
+
+        .top-banner .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--white);
+            padding: 12px 0;
+            box-shadow: var(--header-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .custom-logo {
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-logo img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .logo-badge {
+            background: var(--primary-red);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 5px;
+            border-radius: 3px;
+            transform: rotate(15deg);
+            margin-left: 5px;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 45px 12px 16px;
+            border: 2px solid var(--border-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-orange);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark-text);
+            font-size: 0.9rem;
+        }
+
+        .header-action i {
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+
+        /* Main Navigation */
+        .main-nav {
+            background-color: var(--white);
+            padding: 12px 0;
+            border-top: 1px solid var(--border-gray);
+            border-bottom: 1px solid var(--border-gray);
+            margin-bottom: 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-categories {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-categories a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-categories a.active {
+            color: var(--primary-orange);
+            font-weight: 700;
+        }
+
+        .nav-categories a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-orange);
+            transition: width 0.3s;
+        }
+
+        .nav-categories a:hover:after, .nav-categories a.active:after {
+            width: 100%;
+        }
+
+        .nav-promo {
+            background: var(--primary-red);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(to right, #2196F3, #21CBF3);
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .page-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .page-header-icon {
+            font-size: 4rem;
+            opacity: 0.8;
+        }
+
+        /* Payment & Delivery Content */
+        .payment-delivery-content {
+            margin-bottom: 40px;
+        }
+
+        .info-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .info-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-section h2 {
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .info-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-orange);
+        }
+
+        .info-section p {
+            margin-bottom: 15px;
+            color: var(--medium-gray);
+            line-height: 1.8;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .payment-method {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .payment-method:hover {
+            transform: translateY(-5px);
+        }
+
+        .payment-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-orange);
+        }
+
+        .payment-name {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .payment-description {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Delivery Options */
+        .delivery-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .delivery-option {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .delivery-icon {
+            background-color: var(--primary-orange);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .delivery-info h3 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .delivery-info p {
+            margin-bottom: 0;
+            color: var(--medium-gray);
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .process-steps:before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--border-gray);
+            z-index: 1;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        .step-number {
+            background-color: var(--primary-orange);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .step-text {
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        /* Coverage Map */
+        .coverage-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin: 40px 0;
+        }
+
+        .map-container {
+            height: 400px;
+            background-color: #eaeaea;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--medium-gray);
+            font-style: italic;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-gray);
+            padding-bottom: 15px;
+        }
+
+        .faq-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .faq-answer {
+            margin-top: 10px;
+            color: var(--medium-gray);
+            display: none;
+            padding: 0 0 15px 0;
+            line-height: 1.7;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+
+        .faq-question.active + .faq-answer {
+            display: block;
+        }
+
+        /* Help Section */
+        .help-section {
+            background: linear-gradient(to right, #FF6600, #FF9D4D);
+            color: white;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .help-section h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .help-section p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .help-btn {
+            background-color: white;
+            color: var(--primary-orange);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .help-btn:hover {
+            background-color: var(--light-gray);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--white);
+            padding: 50px 0 0;
+            margin-top: 50px;
+            border-top: 1px solid var(--border-gray);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: var(--dark-text);
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h4:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-orange);
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--medium-gray);
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-orange);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-gray);
+            margin-top: 50px;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .payment-methods {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                width: 100%;
+                max-width: none;
+                margin: 10px 0;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-categories {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .page-header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .delivery-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .process-steps:before {
+                display: none;
+            }
+            
+            .info-section {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-actions {
+                gap: 15px;
+            }
+            
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .help-section {
+                padding: 25px 15px;
+            }
+            
+            .delivery-option {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="container">
+            <span>Francais</span>
+            <span>Brivaro®</span>
+            <span>Lege cle at anal</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="custom-logo">
+                        <img src="B r i v a r o.png" alt="MON MAGASIN">
+                    </div>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Rechercher des produits...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="header-actions">
+                    <a href="#" class="header-action">
+                        <i class="fas fa-user"></i>
+                        <span>Compte</span>
+                    </a>
+                    <a href="#" class="header-action">
+                        <i class="fas fa-heart"></i>
+                        <span>Favoris</span>
+                    </a>
+                    <a href="#" class="header-action">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Panier</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-container">
+                <div class="nav-categories">
+                    <a href="Supermarket.html">Supermarket</a>
+                    <a href="Mode.html">Santé & Beauté</a>
+                    <a href="Maison & Cuisine.html">Maison & Cuisine</a>
+                    <a href="telephone.html">Téléphones</a>
+                    <a href="Ordinateurs.html">Ordinateurs</a>
+                    <a href="Électronique.html">Électronique</a>
+                    
+                </div>
+                <div class="nav-promo">
+                    <i class="fas fa-gift"></i> JOURNEE SPECIALE
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="page-header-content">
+                <div>
+                    <h1 class="page-title">Paiement & Livraison</h1>
+                    <p class="page-subtitle">Options flexibles pour des achats en toute sérénité</p>
+                </div>
+                <div class="page-header-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment & Delivery Content -->
+        <div class="payment-delivery-content">
+            <!-- Process Steps -->
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Choix des produits</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Paiement sécurisé</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Traitement commande</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-text">Livraison rapide</div>
+                </div>
+            </div>
+
+            <!-- Payment Methods Section -->
+            <section class="info-section">
+                <h2>Méthodes de Paiement</h2>
+                <p>Chez Brivaro, nous proposons plusieurs méthodes de paiement sécurisées pour votre commodité. Toutes les transactions sont cryptées et sécurisées pour protéger vos informations financières.</p>
+                
+                <div class="payment-methods">
+                    <div class="payment-method">
+                        <div class="payment-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <h3 class="payment-name">Carte Bancaire</h3>
+                        <p class="payment-description">Paiement sécurisé par carte Visa, MasterCard. Transaction cryptée SSL.</p>
+                    </div>
+                    
+                    <div class="payment-method">
+                        <div class="payment-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h3 class="payment-name">Paiement à la Livraison</h3>
+                        <p class="payment-description">Payez en espèces ou par carte lorsque vous recevez votre colis.</p>
+                    </div>
+                    
+                    <div class="payment-method">
+                        <div class="payment-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h3 class="payment-name">Virement Bancaire</h3>
+                        <p class="payment-description">Effectuez un virement depuis votre compte bancaire (délai de traitement: 24-48h).</p>
+                    </div>
+                    
+                    <div class="payment-method">
+                        <div class="payment-icon">
+                            <i class="fab fa-paypal"></i>
+                        </div>
+                        <h3 class="payment-name">PayPal</h3>
+                        <p class="payment-description">Paiement rapide et sécurisé via votre compte PayPal.</p>
+                    </div>
+                    
+                    <div class="payment-method">
+                        <div class="payment-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <h3 class="payment-name">Portefeuille Brivaro</h3>
+                        <p class="payment-description">Utilisez votre solde Brivaro pour régler vos achats instantanément.</p>
+                    </div>
+                    
+                    <div class="payment-method">
+                        <div class="payment-icon">
+                            <i class="fas fa-money-check"></i>
+                        </div>
+                        <h3 class="payment-name">Paiement en 4 fois</h3>
+                        <p class="payment-description">Étalez vos paiements sans frais pour les commandes de plus de 2000 Dhs.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Delivery Options Section -->
+            <section class="info-section">
+                <h2>Options de Livraison</h2>
+                <p>Nous proposons différentes options de livraison pour s'adapter à vos besoins. Les délais de livraison commencent à compter de la confirmation de votre commande.</p>
+                
+                <div class="delivery-options">
+                    <div class="delivery-option">
+                        <div class="delivery-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <div class="delivery-info">
+                            <h3>Livraison Standard</h3>
+                            <p>Délai: 2-3 jours ouvrables | Frais: 29 Dhs (gratuit à partir de 499 Dhs)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="delivery-option">
+                        <div class="delivery-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="delivery-info">
+                            <h3>Livraison Express</h3>
+                            <p>Délai: 24h | Frais: 49 Dhs (disponible dans les grandes villes)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="delivery-option">
+                        <div class="delivery-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <div class="delivery-info">
+                            <h3>Click & Collect</h3>
+                            <p>Retirez votre commande en magasin sous 2h | Gratuit</p>
+                        </div>
+                    </div>
+                    
+                    <div class="delivery-option">
+                        <div class="delivery-icon">
+                            <i class="fas fa-calendar-day"></i>
+                        </div>
+                        <div class="delivery-info">
+                            <h3>Livraison Programmé</h3>
+                            <p>Choisissez le jour et créneau de livraison | +19 Dhs</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Coverage Map Section -->
+            <section class="coverage-section">
+                <h2>Zones de Livraison</h2>
+                <p>Nous livrons dans tout le Maroc. Les délais peuvent varier en fonction de votre localisation.</p>
+                
+                <div class="map-container">
+                    Carte des zones de livraison (à remplacer par une vraie carte)
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <p><strong>Livraison Express disponible dans:</strong> Casablanca, Rabat, Marrakech, Tanger, Fès, Meknès, Agadir</p>
+                    <p><strong>Délais standards:</strong></p>
+                    <ul style="color: var(--medium-gray); margin-left: 20px;">
+                        <li>Grandes villes: 2-3 jours ouvrables</li>
+                        <li>Villes secondaires: 3-5 jours ouvrables</li>
+                        <li>Zones rurales: 5-7 jours ouvrables</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <h2>Questions Fréquentes</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Comment suivre ma commande?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Une fois votre commande expédiée, vous recevrez un email avec un numéro de suivi. Vous pouvez également suivre votre commande depuis votre compte Brivaro dans la section "Mes commandes".</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Puis-je modifier mon adresse de livraison après avoir passé commande?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Vous pouvez modifier votre adresse de livraison dans les 2 heures suivant la passation de commande. Passé ce délai, veuillez contacter notre service client au +212 5 22 33 44 55.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Que se passe-t-il si je suis absent lors de la livraison?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Le livreur tentera de vous contacter par téléphone. Si vous êtes absent, il déposera un avis de passage et votre colis sera disponible au point relais le plus proche pendant 5 jours ouvrables.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Les paiements sont-ils sécurisés?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolument. Tous les paiements sur Brivaro sont cryptés avec la technologie SSL. Nous ne stockons jamais les informations de votre carte bancaire sur nos serveurs.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Help Section -->
+            <div class="help-section">
+                <h2>Besoin d'Aide?</h2>
+                <p>Notre équipe de support est disponible pour répondre à toutes vos questions concernant le paiement et la livraison</p>
+                <button class="help-btn">Contactez-nous</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Besoin D'aide</h4>
+                     <a href="Contactez-nous.html">Contactez-nous</a>
+                    <a href="FAQ.html">FAQ</a>
+                    <a href="Livraison et Paiement.html">Livraison et Paiement</a>
+                    <a href="Retours et Remboursements.html">Retours et Remboursements</a>
+                    <a href="Service Client.html">Service Client</a>
+                </div>
+                <div class="footer-section">
+                    <h4>À propos de Brivaro</h4>
+                    <a href="À propos de nous.html">À propos de nous</a>
+                    <a href="Carrières.html">Carrières</a>
+                    <a href="Brivaro Express.html">Brivaro Express</a>
+                    <a href="Terms and Conditions.html">Terms and Conditions</a>
+                    <a href="Privacy Policy.html">Privacy Policy</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Paiement et Livraison</h4>
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        <i class="fab fa-cc-visa" style="font-size: 1.8rem; color: #555;"></i>
+                        <i class="fab fa-cc-mastercard" style="font-size: 1.8rem; color: #555;"></i>
+                        <i class="fab fa-cc-paypal" style="font-size: 1.8rem; color: #555;"></i>
+                    </div>
+                   <a href="Méthodes de paiement.html">Méthodes de paiement</a>
+                    <a href="Options de livraison.html">Options de livraison</a>
+                    <a href="Suivi de commande.html">Suivi de commande</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Suivez-nous</h4>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633z"/></svg></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Brivaro. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ toggle functionality
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+
+        // Help button functionality
+        const helpBtn = document.querySelector('.help-btn');
+        helpBtn.addEventListener('click', function() {
+            alert('Redirection vers la page de contact...');
+            // In a real implementation, this would redirect to the contact page
+            // window.location.href = 'contact.html';
+        });
+
+        // Animation for process steps
+        document.addEventListener('DOMContentLoaded', function() {
+            const processSteps = document.querySelectorAll('.process-step');
+            
+            processSteps.forEach((step, index) => {
+                // Add delay for animation effect
+                setTimeout(() => {
+                    step.style.opacity = 1;
+                    step.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>

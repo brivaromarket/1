@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brivaro Express - Brivaro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-red: #E91C1C;
+            --primary-orange: #FF6600;
+            --dark-text: #333333;
+            --medium-gray: #666666;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+            --accent-blue: #0066CC;
+            --discount-green: #388E3C;
+            --border-gray: #E0E0E0;
+            --card-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --header-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--light-gray);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+        }
+
+        /* Top Banner */
+        .top-banner {
+            background-color: var(--dark-text);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 0.8rem;
+        }
+
+        .top-banner .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--white);
+            padding: 12px 0;
+            box-shadow: var(--header-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .custom-logo {
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-logo img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .logo-badge {
+            background: var(--primary-red);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 5px;
+            border-radius: 3px;
+            transform: rotate(15deg);
+            margin-left: 5px;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 45px 12px 16px;
+            border: 2px solid var(--border-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-orange);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark-text);
+            font-size: 0.9rem;
+        }
+
+        .header-action i {
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+
+        /* Main Navigation */
+        .main-nav {
+            background-color: var(--white);
+            padding: 12px 0;
+            border-top: 1px solid var(--border-gray);
+            border-bottom: 1px solid var(--border-gray);
+            margin-bottom: 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-categories {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-categories a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-categories a.active {
+            color: var(--primary-orange);
+            font-weight: 700;
+        }
+
+        .nav-categories a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-orange);
+            transition: width 0.3s;
+        }
+
+        .nav-categories a:hover:after, .nav-categories a.active:after {
+            width: 100%;
+        }
+
+        .nav-promo {
+            background: var(--primary-red);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(to right, #FF6600, #FF9D4D);
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .page-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .page-header-icon {
+            font-size: 4rem;
+            opacity: 0.8;
+        }
+
+        /* Express Content */
+        .express-content {
+            margin-bottom: 40px;
+        }
+
+        .express-intro {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .express-intro h2 {
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .express-intro p {
+            margin-bottom: 15px;
+            color: var(--medium-gray);
+            line-height: 1.8;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Features Section */
+        .features-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+        }
+
+        .features-section h2 {
+            color: var(--primary-orange);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 25px;
+            border-radius: 8px;
+            background-color: var(--light-gray);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            background-color: var(--primary-orange);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--dark-text);
+        }
+
+        .feature-description {
+            color: var(--medium-gray);
+            font-size: 0.95rem;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+        }
+
+        .how-it-works h2 {
+            color: var(--primary-orange);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .process-steps:before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--border-gray);
+            z-index: 1;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        .step-number {
+            background-color: var(--primary-orange);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .step-text {
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        /* Coverage Section */
+        .coverage-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+        }
+
+        .coverage-section h2 {
+            color: var(--primary-orange);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .coverage-card {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .coverage-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--dark-text);
+        }
+
+        .coverage-list {
+            list-style: none;
+            text-align: left;
+            color: var(--medium-gray);
+        }
+
+        .coverage-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .coverage-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--discount-green);
+            font-weight: bold;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+        }
+
+        .pricing-section h2 {
+            color: var(--primary-orange);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .pricing-card {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(to bottom, var(--primary-orange), #FF9D4D);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured .price {
+            color: white;
+        }
+
+        .pricing-card.featured .pricing-description {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .pricing-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--dark-text);
+        }
+
+        .pricing-card.featured .pricing-title {
+            color: white;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--primary-orange);
+        }
+
+        .pricing-description {
+            color: var(--medium-gray);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 25px;
+            color: var(--medium-gray);
+        }
+
+        .pricing-card.featured .pricing-features {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .pricing-features li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .pricing-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--discount-green);
+            font-weight: bold;
+        }
+
+        .pricing-card.featured .pricing-features li:before {
+            color: white;
+        }
+
+        .pricing-btn {
+            background-color: var(--primary-orange);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .pricing-card.featured .pricing-btn {
+            background-color: white;
+            color: var(--primary-orange);
+        }
+
+        .pricing-btn:hover {
+            background: #e65c00;
+        }
+
+        .pricing-card.featured .pricing-btn:hover {
+            background: var(--light-gray);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+        }
+
+        .faq-section h2 {
+            color: var(--primary-orange);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-gray);
+            padding-bottom: 15px;
+        }
+
+        .faq-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .faq-answer {
+            margin-top: 10px;
+            color: var(--medium-gray);
+            display: none;
+            padding: 0 0 15px 0;
+            line-height: 1.7;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+
+        .faq-question.active + .faq-answer {
+            display: block;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(to right, #2196F3, #21CBF3);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .cta-section p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            background-color: white;
+            color: var(--primary-orange);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--light-gray);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--white);
+            padding: 50px 0 0;
+            margin-top: 50px;
+            border-top: 1px solid var(--border-gray);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: var(--dark-text);
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h4:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-orange);
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--medium-gray);
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-orange);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-gray);
+            margin-top: 50px;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .features-grid, .pricing-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .coverage-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                width: 100%;
+                max-width: none;
+                margin: 10px 0;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-categories {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .page-header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .process-steps:before {
+                display: none;
+            }
+            
+            .express-intro, .features-section, .how-it-works, .coverage-section, .pricing-section, .faq-section {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-actions {
+                gap: 15px;
+            }
+            
+            .features-grid, .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="container">
+            <span>Francais</span>
+            <span>Brivaro®</span>
+            <span>Lege cle at anal</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="custom-logo">
+                        <img src="B r i v a r o.png" alt="MON MAGASIN">
+                    </div>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Rechercher des produits...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="header-actions">
+                    <a href="#" class="header-action">
+                        <i class="fas fa-user"></i>
+                        <span>Compte</span>
+                    </a>
+                    <a href="#" class="header-action">
+                        <i class="fas fa-heart"></i>
+                        <span>Favoris</span>
+                    </a>
+                    <a href="#" class="header-action">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Panier</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-container">
+                <div class="nav-categories">
+                    <a href="Supermarket.html">Supermarket</a>
+                    <a href="Mode.html">Santé & Beauté</a>
+                    <a href="Maison & Cuisine.html">Maison & Cuisine</a>
+                    <a href="telephone.html">Téléphones</a>
+                    <a href="Ordinateurs.html">Ordinateurs</a>
+                    <a href="Électronique.html">Électronique</a>
+                    
+                </div>
+                <div class="nav-promo">
+                    <i class="fas fa-gift"></i> JOURNEE SPECIALE
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="page-header-content">
+                <div>
+                    <h1 class="page-title">Brivaro Express</h1>
+                    <p class="page-subtitle">Livraison ultra-rapide en moins de 24h</p>
+                </div>
+                <div class="page-header-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Express Content -->
+        <div class="express-content">
+            <!-- Intro Section -->
+            <section class="express-intro">
+                <h2>Service de Livraison Express</h2>
+                <p>Brivaro Express est notre service de livraison premium qui vous permet de recevoir vos commandes en moins de 24 heures. Parfait pour les urgences et ceux qui n'aiment pas attendre.</p>
+                <p>Avec Brivaro Express, profitez de la livraison la plus rapide du marché, avec des livreurs dédiés et un suivi en temps réel de votre colis.</p>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section">
+                <h2>Pourquoi choisir Brivaro Express?</h2>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3 class="feature-title">Livraison en 24h</h3>
+                        <p class="feature-description">Recevez vos articles en moins de 24 heures après la confirmation de commande.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Suivi en Temps Réel</h3>
+                        <p class="feature-description">Suivez votre colis en temps réel avec notre système de géolocalisation avancé.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3 class="feature-title">Support Prioritaire</h3>
+                        <p class="feature-description">Accès prioritaire à notre équipe de support client dédiée.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3 class="feature-title">Créneaux Horaires</h3>
+                        <p class="feature-description">Choisissez le créneau horaire qui vous convient pour la livraison.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-box-open"></i>
+                        </div>
+                        <h3 class="feature-title">Emballage Spécial</h3>
+                        <p class="feature-description">Emballage renforcé et sécurisé pour une protection optimale de vos articles.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Retours Express</h3>
+                        <p class="feature-description">Service de retour accéléré avec ramassage à domicile sous 24h.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works Section -->
+            <section class="how-it-works">
+                <h2>Comment ça marche?</h2>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Commandez</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Choisissez Express</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Confirmation</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <div class="step-text">Livraison</div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; color: var(--medium-gray);">
+                    <p>Le processus Brivaro Express est simple et efficace. Après avoir passé commande, sélectionnez l'option Brivaro Express à l'étape de livraison.</p>
+                    <p>Vous recevrez une confirmation immédiate et pourrez suivre votre colis en temps réel jusqu'à sa livraison.</p>
+                </div>
+            </section>
+
+            <!-- Coverage Section -->
+            <section class="coverage-section">
+                <h2>Zones de Livraison Express</h2>
+                
+                <div class="coverage-grid">
+                    <div class="coverage-card">
+                        <h3 class="coverage-title">Zones Couvertes</h3>
+                        <ul class="coverage-list">
+                            <li>Casablanca et banlieue</li>
+                            <li>Rabat-Salé</li>
+                            <li>Marrakech</li>
+                            <li>Tanger</li>
+                            <li>Fès</li>
+                            <li>Meknès</li>
+                            <li>Agadir</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="coverage-card">
+                        <h3 class="coverage-title">Horaires de Livraison</h3>
+                        <ul class="coverage-list">
+                            <li>Lundi au Vendredi: 8h - 20h</li>
+                            <li>Samedi: 9h - 18h</li>
+                            <li>Dimanche: 10h - 16h</li>
+                            <li>Jours fériés: Service limité</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <p style="color: var(--medium-gray);">Notre service Express s'étend progressivement à de nouvelles zones. Contactez-nous pour savoir si votre région est couverte.</p>
+                </div>
+            </section>
+
+            <!-- Pricing Section -->
+            <section class="pricing-section">
+                <h2>Options de Livraison</h2>
+                
+                <div class="pricing-cards">
+                    <div class="pricing-card">
+                        <h3 class="pricing-title">Livraison Standard</h3>
+                        <div class="price">29 DH</div>
+                        <p class="pricing-description">Gratuit à partir de 499 DH</p>
+                        <ul class="pricing-features">
+                            <li>Délai: 2-3 jours ouvrables</li>
+                            <li>Suivi de base</li>
+                            <li>Heure de livraison standard</li>
+                            <li>Support client standard</li>
+                        </ul>
+                        <button class="pricing-btn">Choisir</button>
+                    </div>
+                    
+                    <div class="pricing-card featured">
+                        <h3 class="pricing-title">Brivaro Express</h3>
+                        <div class="price">49 DH</div>
+                        <p class="pricing-description">Livraison en moins de 24h</p>
+                        <ul class="pricing-features">
+                            <li>Délai: 24 heures max</li>
+                            <li>Suivi en temps réel</li>
+                            <li>Choix du créneau horaire</li>
+                            <li>Support client prioritaire</li>
+                            <li>Emballage renforcé</li>
+                        </ul>
+                        <button class="pricing-btn">Choisir</button>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <h3 class="pricing-title">Express Premium</h3>
+                        <div class="price">79 DH</div>
+                        <p class="pricing-description">Service haut de gamme</p>
+                        <ul class="pricing-features">
+                            <li>Délai: 4-6 heures</li>
+                            <li>Suivi GPS en direct</li>
+                            <li>Livraison 7j/7</li>
+                            <li>Support client dédié</li>
+                            <li>Installation incluse*</li>
+                        </ul>
+                        <button class="pricing-btn">Choisir</button>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <p style="color: var(--medium-gray); font-size: 0.9rem;">*Installation incluse pour les produits éligibles seulement</p>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <h2>Questions Fréquentes</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quels produits sont éligibles à Brivaro Express?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>La plupart de nos produits sont éligibles au service Brivaro Express. Certains articles volumineux ou nécessitant une installation spéciale peuvent avoir des conditions particulières. Un indicateur "Eligible pour Express" est visible sur les fiches produits concernées.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Puis-je programmer une livraison Express pour le weekend?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui, Brivaro Express propose des livraisons le weekend dans la plupart des zones couvertes. Des frais supplémentaires peuvent s'appliquer pour les créneaux en dehors des heures standard.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Que se passe-t-il si ma livraison Express est retardée?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>En cas de retard de livraison non imputable au client, Brivaro rembourse intégralement les frais de livraison Express. De plus, nous offrons un bon de réduction de 100 DH pour votre prochain achat.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Comment suivre ma livraison Express?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Vous recevrez un lien de suivi par SMS et email après l'expédition de votre commande. Ce lien vous permet de voir la position de votre livreur en temps réel et l'heure de livraison estimée.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h2>Prêt à profiter de la livraison Express?</h2>
+                <p>Commandez maintenant et recevez vos articles en moins de 24 heures avec Brivaro Express</p>
+                <button class="cta-btn">Découvrir les produits éligibles</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Besoin D'aide</h4>
+                    <a href="Contactez-nous.html">Contactez-nous</a>
+                    <a href="FAQ.html">FAQ</a>
+                    <a href="Livraison et Paiement.html">Livraison et Paiement</a>
+                    <a href="Retours et Remboursements.html">Retours et Remboursements</a>
+                    <a href="Service Client.html">Service Client</a>
+                </div>
+                <div class="footer-section">
+                    <h4>À propos de Brivaro</h4>
+                    <a href="À propos de nous.html">À propos de nous</a>
+                    <a href="Carrières.html">Carrières</a>
+                    <a href="Brivaro Express.html">Brivaro Express</a>
+                    <a href="Terms and Conditions.html">Terms and Conditions</a>
+                    <a href="Privacy Policy.html">Privacy Policy</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Paiement et Livraison</h4>
+                   <div class="payment-methods">
+                        <i class="fab fa-cc-visa payment-icon"></i>
+                        <i class="fab fa-cc-mastercard payment-icon"></i>
+                        <i class="fab fa-cc-paypal payment-icon"></i>
+                    </div>
+                   <a href="Méthodes de paiement.html">Méthodes de paiement</a>
+                    <a href="Options de livraison.html">Options de livraison</a>
+                    <a href="Suivi de commande.html">Suivi de commande</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Suivez-nous</h4>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633z"/></svg></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Brivaro. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown timer
+        function updateCountdown() {
+            const countdownElements = document.querySelectorAll('.countdown-timer');
+            countdownElements.forEach(el => {
+                // Simulate countdown - in a real implementation, calculate actual time remaining
+                const parts = el.textContent.split(':');
+                let hours = parseInt(parts[0]);
+                let minutes = parseInt(parts[1]);
+                let seconds = parseInt(parts[2]);
+                
+                seconds--;
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                    if (minutes < 0) {
+                        minutes = 59;
+                        hours--;
+                        if (hours < 0) {
+                            hours = 23;
+                        }
+                    }
+                }
+                
+                el.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                // Add pulse animation when time is running low
+                if (hours === 0 && minutes < 5) {
+                    el.classList.add('pulse');
+                } else {
+                    el.classList.remove('pulse');
+                }
+            });
+        }
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        
+        // Product card hover effects
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 6px 15px rgba(0,0,0,0.1)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+            });
+        });
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('MONMAGASIN website loaded successfully');
+        });
+    </script>
+</body>
+</html>

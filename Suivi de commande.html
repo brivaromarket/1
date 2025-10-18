@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi de Commande - Brivaro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-red: #E91C1C;
+            --primary-orange: #FF6600;
+            --dark-text: #333333;
+            --medium-gray: #666666;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+            --accent-blue: #0066CC;
+            --discount-green: #388E3C;
+            --border-gray: #E0E0E0;
+            --card-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --header-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--light-gray);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+        }
+
+        /* Top Banner */
+        .top-banner {
+            background-color: var(--dark-text);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 0.8rem;
+        }
+
+        .top-banner .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--white);
+            padding: 12px 0;
+            box-shadow: var(--header-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .custom-logo {
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-logo img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .logo-badge {
+            background: var(--primary-red);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 5px;
+            border-radius: 3px;
+            transform: rotate(15deg);
+            margin-left: 5px;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 45px 12px 16px;
+            border: 2px solid var(--border-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-orange);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark-text);
+            font-size: 0.9rem;
+        }
+
+        .header-action i {
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+
+        /* Main Navigation */
+        .main-nav {
+            background-color: var(--white);
+            padding: 12px 0;
+            border-top: 1px solid var(--border-gray);
+            border-bottom: 1px solid var(--border-gray);
+            margin-bottom: 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-categories {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-categories a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-categories a.active {
+            color: var(--primary-orange);
+            font-weight: 700;
+        }
+
+        .nav-categories a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-orange);
+            transition: width 0.3s;
+        }
+
+        .nav-categories a:hover:after, .nav-categories a.active:after {
+            width: 100%;
+        }
+
+        .nav-promo {
+            background: var(--primary-red);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(to right, #2196F3, #21CBF3);
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .page-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .page-header-icon {
+            font-size: 4rem;
+            opacity: 0.8;
+        }
+
+        /* Tracking Content */
+        .tracking-content {
+            margin-bottom: 40px;
+        }
+
+        .tracking-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .tracking-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .tracking-section h2 {
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .tracking-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-orange);
+        }
+
+        .tracking-section p {
+            margin-bottom: 15px;
+            color: var(--medium-gray);
+            line-height: 1.8;
+        }
+
+        .tracking-section ul, .tracking-section ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+            color: var(--medium-gray);
+        }
+
+        .tracking-section li {
+            margin-bottom: 8px;
+        }
+
+        .highlight-box {
+            background-color: var(--light-gray);
+            border-left: 4px solid var(--primary-orange);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark-text);
+        }
+
+        .last-updated {
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        /* Tracking Form */
+        .tracking-form {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-title {
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .form-description {
+            color: var(--medium-gray);
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary-orange);
+            outline: none;
+        }
+
+        .btn-track {
+            background-color: var(--primary-orange);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-track:hover {
+            background-color: #e55a00;
+        }
+
+        /* Order Status */
+        .order-status {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .order-id {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark-text);
+        }
+
+        .order-date {
+            color: var(--medium-gray);
+        }
+
+        .order-status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-processing {
+            background-color: #FFF3CD;
+            color: #856404;
+        }
+
+        .status-shipped {
+            background-color: #D1ECF1;
+            color: #0C5460;
+        }
+
+        .status-delivered {
+            background-color: #D4EDDA;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background-color: #F8D7DA;
+            color: #721C24;
+        }
+
+        /* Tracking Timeline */
+        .tracking-timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 30px 0;
+        }
+
+        .tracking-timeline:before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--border-gray);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -30px;
+            top: 3px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--white);
+            border: 2px solid var(--border-gray);
+        }
+
+        .timeline-item.active .timeline-dot {
+            background-color: var(--primary-orange);
+            border-color: var(--primary-orange);
+        }
+
+        .timeline-item.completed .timeline-dot {
+            background-color: var(--discount-green);
+            border-color: var(--discount-green);
+        }
+
+        .timeline-content {
+            padding: 15px;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+        }
+
+        .timeline-item.active .timeline-content {
+            background-color: #FFF8E6;
+            border-left: 3px solid var(--primary-orange);
+        }
+
+        .timeline-item.completed .timeline-content {
+            background-color: #E8F5E9;
+            border-left: 3px solid var(--discount-green);
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark-text);
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+            margin-bottom: 5px;
+        }
+
+        .timeline-description {
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+        }
+
+        /* Order Details */
+        .order-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .detail-card {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .detail-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark-text);
+            font-size: 1.1rem;
+            border-bottom: 1px solid var(--border-gray);
+            padding-bottom: 10px;
+        }
+
+        .detail-item {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .detail-label {
+            color: var(--medium-gray);
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        /* Package Tracking */
+        .package-tracking {
+            margin: 30px 0;
+        }
+
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .package-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .package-icon {
+            font-size: 2rem;
+            color: var(--primary-orange);
+        }
+
+        .package-id {
+            font-weight: 700;
+            color: var(--dark-text);
+        }
+
+        .package-status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #D1ECF1;
+            color: #0C5460;
+        }
+
+        .package-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .package-timeline:before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--border-gray);
+        }
+
+        .package-event {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .package-dot {
+            position: absolute;
+            left: -30px;
+            top: 3px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--discount-green);
+            border: 2px solid var(--discount-green);
+        }
+
+        .package-event.active .package-dot {
+            background-color: var(--primary-orange);
+            border-color: var(--primary-orange);
+        }
+
+        .package-event-content {
+            padding: 15px;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+        }
+
+        .package-event.active .package-event-content {
+            background-color: #FFF8E6;
+            border-left: 3px solid var(--primary-orange);
+        }
+
+        .package-location {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark-text);
+        }
+
+        .package-date {
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+            margin-bottom: 5px;
+        }
+
+        .package-description {
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+        }
+
+        /* Delivery Map */
+        .delivery-map {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .map-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .map-placeholder {
+            background: linear-gradient(to right, #E3F2FD, #BBDEFB);
+            height: 300px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--medium-gray);
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        .driver-marker {
+            position: absolute;
+            top: 50%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            background-color: var(--primary-orange);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .destination-marker {
+            position: absolute;
+            top: 60%;
+            left: 70%;
+            transform: translate(-50%, -50%);
+            background-color: var(--discount-green);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .map-legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-driver {
+            background-color: var(--primary-orange);
+        }
+
+        .legend-destination {
+            background-color: var(--discount-green);
+        }
+
+        /* Support Section */
+        .support-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .support-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .support-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .support-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-orange);
+        }
+
+        .support-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark-text);
+        }
+
+        .support-description {
+            color: var(--medium-gray);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .support-link {
+            color: var(--primary-orange);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .support-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .toc h2 {
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            margin-bottom: 10px;
+        }
+
+        .toc-list a {
+            color: var(--medium-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .toc-list a:hover {
+            color: var(--primary-orange);
+        }
+
+        .toc-list a i {
+            margin-right: 10px;
+            color: var(--primary-orange);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--white);
+            padding: 50px 0 0;
+            margin-top: 50px;
+            border-top: 1px solid var(--border-gray);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: var(--dark-text);
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h4:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-orange);
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--medium-gray);
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-orange);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-gray);
+            margin-top: 50px;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .order-details {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                width: 100%;
+                max-width: none;
+                margin: 10px 0;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-categories {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .page-header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .tracking-section {
+                padding: 25px;
+            }
+            
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .support-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-actions {
+                gap: 15px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .tracking-section {
+                padding: 20px 15px;
+            }
+            
+            .package-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="container">
+            <span>Francais</span>
+            <span>Brivaro®</span>
+            <span>Lege cle at anal</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="custom-logo">
+                        <img src="B r i v a r o.png" alt="MON MAGASIN">
+                    </div>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Rechercher des produits...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="header-actions">
+                    <a href="#" class="header-action">
+                        <i class="fas fa-user"></i>
+                        <span>Compte</span>
+                    </a>
+                    <a href="#" class="header-action">
+                        <i class="fas fa-heart"></i>
+                        <span>Favoris</span>
+                    </a>
+                    <a href="#" class="header-action">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Panier</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-container">
+                <div class="nav-categories">
+                    <a href="Supermarket.html">Supermarket</a>
+                    <a href="Mode.html">Santé & Beauté</a>
+                    <a href="Maison & Cuisine.html">Maison & Cuisine</a>
+                    <a href="telephone.html">Téléphones</a>
+                    <a href="Ordinateurs.html">Ordinateurs</a>
+                    <a href="Électronique.html">Électronique</a>
+                </div>
+                <div class="nav-promo">
+                    <i class="fas fa-gift"></i> JOURNEE SPECIALE
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="page-header-content">
+                <div>
+                    <h1 class="page-title">Suivi de Commande</h1>
+                    <p class="page-subtitle">Suivez votre commande en temps réel</p>
+                </div>
+                <div class="page-header-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tracking Content -->
+        <div class="tracking-content">
+            <!-- Table of Contents -->
+            <div class="toc">
+                <h2>Options de Suivi</h2>
+                <ul class="toc-list">
+                    <li><a href="#track-order"><i class="fas fa-chevron-right"></i> Suivre une Commande</a></li>
+                    <li><a href="#order-status"><i class="fas fa-chevron-right"></i> Statut de Commande</a></li>
+                    <li><a href="#tracking-timeline"><i class="fas fa-chevron-right"></i> Chronologie de Livraison</a></li>
+                    <li><a href="#package-tracking"><i class="fas fa-chevron-right"></i> Suivi de Colis</a></li>
+                    <li><a href="#delivery-map"><i class="fas fa-chevron-right"></i> Carte de Livraison</a></li>
+                    <li><a href="#support"><i class="fas fa-chevron-right"></i> Support Livraison</a></li>
+                </ul>
+            </div>
+
+            <!-- Track Order Form -->
+            <section class="tracking-section" id="track-order">
+                <h2>Suivre une Commande</h2>
+                <div class="article">
+                    <p>Entrez votre numéro de commande et votre email pour suivre l'état de votre livraison en temps réel.</p>
+                    
+                    <div class="tracking-form">
+                        <h3 class="form-title">Rechercher une commande</h3>
+                        <p class="form-description">Saisissez les informations de votre commande pour accéder à son statut détaillé</p>
+                        
+                        <form id="tracking-form">
+                            <div class="form-group">
+                                <label for="order-number">Numéro de commande</label>
+                                <input type="text" id="order-number" placeholder="Ex: BRV123456789" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Adresse email</label>
+                                <input type="email" id="email" placeholder="Votre email utilisé pour la commande" required>
+                            </div>
+                            
+                            <button type="submit" class="btn-track">
+                                <i class="fas fa-search"></i> Suivre la commande
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <p>Vous ne trouvez pas votre numéro de commande? Consultez votre email de confirmation ou contactez notre service client.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Order Status -->
+            <section class="tracking-section" id="order-status">
+                <h2>Statut de Commande</h2>
+                <div class="article">
+                    <div class="order-status">
+                        <div class="order-header">
+                            <div>
+                                <div class="order-id">Commande #BRV829175364</div>
+                                <div class="order-date">Passée le 15 janvier 2025 à 14:30</div>
+                            </div>
+                            <div class="order-status-badge status-shipped">Expédiée</div>
+                        </div>
+                        
+                        <div class="order-details">
+                            <div class="detail-card">
+                                <h3>Informations de Livraison</h3>
+                                <div class="detail-item">
+                                    <span class="detail-label">Destinataire:</span>
+                                    <span class="detail-value">Marie Dupont</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Adresse:</span>
+                                    <span class="detail-value">123 Rue de Commerce, Casablanca</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Téléphone:</span>
+                                    <span class="detail-value">+212 6 12 34 56 78</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Méthode:</span>
+                                    <span class="detail-value">Livraison Standard</span>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-card">
+                                <h3>Résumé de Commande</h3>
+                                <div class="detail-item">
+                                    <span class="detail-label">Sous-total:</span>
+                                    <span class="detail-value">749 MAD</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Frais de livraison:</span>
+                                    <span class="detail-value">29 MAD</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Taxes:</span>
+                                    <span class="detail-value">75 MAD</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Total:</span>
+                                    <span class="detail-value">853 MAD</span>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-card">
+                                <h3>Informations de Paiement</h3>
+                                <div class="detail-item">
+                                    <span class="detail-label">Méthode:</span>
+                                    <span class="detail-value">Carte Mastercard</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Statut:</span>
+                                    <span class="detail-value">Payé</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Référence:</span>
+                                    <span class="detail-value">PAY-2874-2025</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Date de paiement:</span>
+                                    <span class="detail-value">15/01/2025</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tracking Timeline -->
+            <section class="tracking-section" id="tracking-timeline">
+                <h2>Chronologie de Livraison</h2>
+                <div class="article">
+                    <p>Suivez les étapes de traitement et de livraison de votre commande.</p>
+                    
+                    <div class="tracking-timeline">
+                        <div class="timeline-item completed">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Commande confirmée</div>
+                                <div class="timeline-date">15 janvier 2025, 14:30</div>
+                                <div class="timeline-description">Votre commande a été confirmée et est en attente de traitement.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item completed">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Paiement accepté</div>
+                                <div class="timeline-date">15 janvier 2025, 14:32</div>
+                                <div class="timeline-description">Votre paiement a été traité avec succès.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item completed">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Préparation en cours</div>
+                                <div class="timeline-date">15 janvier 2025, 16:45</div>
+                                <div class="timeline-description">Votre commande est en cours de préparation dans notre entrepôt.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item completed">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Expédiée</div>
+                                <div class="timeline-date">16 janvier 2025, 09:15</div>
+                                <div class="timeline-description">Votre commande a été expédiée. Numéro de suivi: TRK7839201746</div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item active">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">En transit</div>
+                                <div class="timeline-date">16 janvier 2025, 14:20</div>
+                                <div class="timeline-description">Votre colis est en cours d'acheminement vers le centre de distribution.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">En livraison</div>
+                                <div class="timeline-date">Estimation: 17 janvier 2025</div>
+                                <div class="timeline-description">Votre colis sera livré par notre coursier.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Livrée</div>
+                                <div class="timeline-date">Estimation: 17 janvier 2025</div>
+                                <div class="timeline-description">Votre commande sera livrée à l'adresse indiquée.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <p>Vous recevrez une notification par SMS et email à chaque étape importante de votre livraison.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Package Tracking -->
+            <section class="tracking-section" id="package-tracking">
+                <h2>Suivi de Colis</h2>
+                <div class="article">
+                    <p>Informations détaillées sur l'acheminement de votre colis.</p>
+                    
+                    <div class="package-tracking">
+                        <div class="package-header">
+                            <div class="package-info">
+                                <div class="package-icon">
+                                    <i class="fas fa-box"></i>
+                                </div>
+                                <div>
+                                    <div class="package-id">Colis #PKG829175364</div>
+                                    <div class="package-status">En transit</div>
+                                </div>
+                            </div>
+                            <div>
+                                <strong>Transporteur:</strong> Brivaro Express
+                            </div>
+                        </div>
+                        
+                        <div class="package-timeline">
+                            <div class="package-event completed">
+                                <div class="package-dot"></div>
+                                <div class="package-event-content">
+                                    <div class="package-location">Entrepôt Brivaro, Casablanca</div>
+                                    <div class="package-date">16 janvier 2025, 09:15</div>
+                                    <div class="package-description">Colis scanné et sorti de l'entrepôt</div>
+                                </div>
+                            </div>
+                            
+                            <div class="package-event completed">
+                                <div class="package-dot"></div>
+                                <div class="package-event-content">
+                                    <div class="package-location">Centre de tri, Casablanca</div>
+                                    <div class="package-date">16 janvier 2025, 11:30</div>
+                                    <div class="package-description">Colis reçu au centre de tri régional</div>
+                                </div>
+                            </div>
+                            
+                            <div class="package-event completed">
+                                <div class="package-dot"></div>
+                                <div class="package-event-content">
+                                    <div class="package-location">Centre de tri, Casablanca</div>
+                                    <div class="package-date">16 janvier 2025, 13:45</div>
+                                    <div class="package-description">Colis trié et chargé pour la livraison</div>
+                                </div>
+                            </div>
+                            
+                            <div class="package-event active">
+                                <div class="package-dot"></div>
+                                <div class="package-event-content">
+                                    <div class="package-location">En transit</div>
+                                    <div class="package-date">16 janvier 2025, 14:20</div>
+                                    <div class="package-description">Colis en cours d'acheminement vers votre région</div>
+                                </div>
+                            </div>
+                            
+                            <div class="package-event">
+                                <div class="package-dot"></div>
+                                <div class="package-event-content">
+                                    <div class="package-location">Centre de distribution local</div>
+                                    <div class="package-date">Estimation: 16 janvier 2025, 18:00</div>
+                                    <div class="package-description">Colis arrivé au centre de distribution</div>
+                                </div>
+                            </div>
+                            
+                            <div class="package-event">
+                                <div class="package-dot"></div>
+                                <div class="package-event-content">
+                                    <div class="package-location">En livraison</div>
+                                    <div class="package-date">Estimation: 17 janvier 2025, 09:00</div>
+                                    <div class="package-description">Colis chargé dans le véhicule de livraison</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <p>Le délai de livraison estimé est de 1-2 jours ouvrables. Vous recevrez un SMS lorsque le livreur sera dans votre quartier.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Delivery Map -->
+            <section class="tracking-section" id="delivery-map">
+                <h2>Carte de Livraison</h2>
+                <div class="article">
+                    <p>Suivez en temps réel la position de votre colis sur notre carte interactive.</p>
+                    
+                    <div class="delivery-map">
+                        <div class="map-header">
+                            <h3>Suivi en direct de votre livraison</h3>
+                            <p>Position actuelle de votre colis</p>
+                        </div>
+                        
+                        <div class="map-placeholder">
+                            <div class="driver-marker">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div class="destination-marker">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div style="text-align: center;">
+                                <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-right: 15px;"></i>
+                                <div>Carte interactive de suivi de livraison</div>
+                                <div style="font-size: 0.9rem; margin-top: 10px;">Votre colis est à environ 15km de destination</div>
+                            </div>
+                        </div>
+                        
+                        <div class="map-legend">
+                            <div class="legend-item">
+                                <div class="legend-color legend-driver"></div>
+                                <span>Position du livreur</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color legend-destination"></div>
+                                <span>Destination de livraison</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <p>Pour des raisons de sécurité, la localisation précise n'est affichée que lorsque le livreur est à moins de 5km de votre domicile.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Support -->
+            <section class="tracking-section" id="support">
+                <h2>Support Livraison</h2>
+                <div class="article">
+                    <p>Notre équipe est à votre disposition pour toute question concernant votre commande.</p>
+                    
+                    <div class="support-options">
+                        <div class="support-card">
+                            <div class="support-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <h3 class="support-title">Support Téléphonique</h3>
+                            <p class="support-description">Parlez directement à un conseiller</p>
+                            <div class="support-info">+212 5 22 45 78 92</div>
+                            <a href="#" class="support-link">Lundi-Samedi, 8h-20h</a>
+                        </div>
+                        
+                        <div class="support-card">
+                            <div class="support-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h3 class="support-title">Chat en Direct</h3>
+                            <p class="support-description">Obtenez une réponse immédiate</p>
+                            <div class="support-info">Disponible 24/7</div>
+                            <a href="#" class="support-link">Démarrer une conversation</a>
+                        </div>
+                        
+                        <div class="support-card">
+                            <div class="support-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3 class="support-title">Email</h3>
+                            <p class="support-description">Contactez-nous par email</p>
+                            <div class="support-info">support@brivaro.ma</div>
+                            <a href="#" class="support-link">Réponse sous 24h</a>
+                        </div>
+                        
+                        <div class="support-card">
+                            <div class="support-icon">
+                                <i class="fas fa-question-circle"></i>
+                            </div>
+                            <h3 class="support-title">FAQ</h3>
+                            <p class="support-description">Trouvez des réponses aux questions fréquentes</p>
+                            <div class="support-info">Centre d'aide complet</div>
+                            <a href="#" class="support-link">Consulter la FAQ</a>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <p>Pour une assistance plus rapide, ayez sous la main votre numéro de commande lorsque vous nous contactez.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Last Updated -->
+            <div class="last-updated">
+                Dernière mise à jour: 16 janvier 2025, 14:30
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Besoin D'aide</h4>
+                    <a href="Contactez-nous.html">Contactez-nous</a>
+                    <a href="FAQ.html">FAQ</a>
+                    <a href="Livraison et Paiement.html">Livraison et Paiement</a>
+                    <a href="Retours et Remboursements.html">Retours et Remboursements</a>
+                    <a href="Service Client.html">Service Client</a>
+                </div>
+                <div class="footer-section">
+                    <h4>À propos de Brivaro</h4>
+                    <a href="À propos de nous.html">À propos de nous</a>
+                    <a href="Carrières.html">Carrières</a>
+                    <a href="Brivaro Express.html">Brivaro Express</a>
+                    <a href="Terms and Conditions.html">Terms and Conditions</a>
+                    <a href="Privacy Policy.html">Privacy Policy</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Paiement et Livraison</h4>
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        <i class="fab fa-cc-visa" style="font-size: 1.8rem; color: #555;"></i>
+                        <i class="fab fa-cc-mastercard" style="font-size: 1.8rem; color: #555;"></i>
+                        <i class="fab fa-cc-paypal" style="font-size: 1.8rem; color: #555;"></i>
+                    </div>
+                    <a href="Méthodes de paiement.html">Méthodes de paiement</a>
+                    <a href="Options de livraison.html">Options de livraison</a>
+                    <a href="Suivi de commande.html">Suivi de commande</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Suivez-nous</h4>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633z"/></svg></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Brivaro. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for table of contents links
+        document.querySelectorAll('.toc-list a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 20,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Highlight current section in view
+        const sections = document.querySelectorAll('.tracking-section');
+        const navLinks = document.querySelectorAll('.toc-list a');
+        
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('tracking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const orderNumber = document.getElementById('order-number').value;
+            const email = document.getElementById('email').value;
+            
+            // Simulate tracking
+            alert(`Recherche de la commande: ${orderNumber}\nEmail: ${email}\n\nCette fonctionnalité serait connectée à un système de suivi réel en production.`);
+        });
+    </script>
+</body>
+</html>

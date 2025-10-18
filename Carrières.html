@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrières - Brivaro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-red: #E91C1C;
+            --primary-orange: #FF6600;
+            --dark-text: #333333;
+            --medium-gray: #666666;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+            --accent-blue: #0066CC;
+            --discount-green: #388E3C;
+            --border-gray: #E0E0E0;
+            --card-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --header-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--light-gray);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+        }
+
+        /* Top Banner */
+        .top-banner {
+            background-color: var(--dark-text);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 0.8rem;
+        }
+
+        .top-banner .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--white);
+            padding: 12px 0;
+            box-shadow: var(--header-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .custom-logo {
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-logo img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .logo-badge {
+            background: var(--primary-red);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 5px;
+            border-radius: 3px;
+            transform: rotate(15deg);
+            margin-left: 5px;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 45px 12px 16px;
+            border: 2px solid var(--border-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-orange);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark-text);
+            font-size: 0.9rem;
+        }
+
+        .header-action i {
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+
+        /* Main Navigation */
+        .main-nav {
+            background-color: var(--white);
+            padding: 12px 0;
+            border-top: 1px solid var(--border-gray);
+            border-bottom: 1px solid var(--border-gray);
+            margin-bottom: 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-categories {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-categories a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-categories a.active {
+            color: var(--primary-orange);
+            font-weight: 700;
+        }
+
+        .nav-categories a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-orange);
+            transition: width 0.3s;
+        }
+
+        .nav-categories a:hover:after, .nav-categories a.active:after {
+            width: 100%;
+        }
+
+        .nav-promo {
+            background: var(--primary-red);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(to right, #2196F3, #21CBF3);
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .page-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .page-header-icon {
+            font-size: 4rem;
+            opacity: 0.8;
+        }
+
+        /* Careers Content */
+        .careers-content {
+            margin-bottom: 40px;
+        }
+
+        .careers-intro {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .careers-intro h2 {
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .careers-intro p {
+            margin-bottom: 15px;
+            color: var(--medium-gray);
+            line-height: 1.8;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Values Section */
+        .values-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+        }
+
+        .values-section h2 {
+            color: var(--primary-orange);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 25px;
+            border-radius: 8px;
+            background-color: var(--light-gray);
+            transition: transform 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            background-color: var(--primary-orange);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+        }
+
+        .value-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--dark-text);
+        }
+
+        .value-description {
+            color: var(--medium-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Job Openings Section */
+        .jobs-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+        }
+
+        .jobs-section h2 {
+            color: var(--primary-orange);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .jobs-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 1px solid var(--border-gray);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-orange);
+            color: white;
+            border-color: var(--primary-orange);
+        }
+
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .job-card {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 25px;
+            transition: all 0.3s;
+            border-left: 4px solid var(--primary-orange);
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .job-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark-text);
+        }
+
+        .job-details {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .job-detail {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        .job-description {
+            color: var(--medium-gray);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .job-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .apply-btn {
+            background-color: var(--primary-orange);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .apply-btn:hover {
+            background: #e65c00;
+        }
+
+        .detail-btn {
+            background-color: transparent;
+            color: var(--primary-orange);
+            border: 1px solid var(--primary-orange);
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .detail-btn:hover {
+            background-color: var(--primary-orange);
+            color: white;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+        }
+
+        .benefits-section h2 {
+            color: var(--primary-orange);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .benefit-icon {
+            background-color: var(--light-gray);
+            color: var(--primary-orange);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.5rem;
+        }
+
+        .benefit-title {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: var(--dark-text);
+        }
+
+        .benefit-description {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Process Section */
+        .process-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+        }
+
+        .process-section h2 {
+            color: var(--primary-orange);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .process-steps:before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--border-gray);
+            z-index: 1;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        .step-number {
+            background-color: var(--primary-orange);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .step-text {
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(to right, #FF6600, #FF9D4D);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .cta-section p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            background-color: white;
+            color: var(--primary-orange);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--light-gray);
+            transform: translateY(-2px);
+        }
+
+        .cta-btn.outline {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-btn.outline:hover {
+            background-color: white;
+            color: var(--primary-orange);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--white);
+            padding: 50px 0 0;
+            margin-top: 50px;
+            border-top: 1px solid var(--border-gray);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: var(--dark-text);
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h4:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-orange);
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--medium-gray);
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-orange);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-gray);
+            margin-top: 50px;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .values-grid, .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                width: 100%;
+                max-width: none;
+                margin: 10px 0;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-categories {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .page-header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .process-steps:before {
+                display: none;
+            }
+            
+            .careers-intro, .values-section, .jobs-section, .benefits-section, .process-section {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-actions {
+                gap: 15px;
+            }
+            
+            .values-grid, .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section {
+                padding: 40px 20px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .job-details {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="container">
+            <span>Francais</span>
+            <span>Brivaro®</span>
+            <span>Lege cle at anal</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="custom-logo">
+                        <img src="B r i v a r o.png" alt="MON MAGASIN">
+                    </div>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Rechercher des produits...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="header-actions">
+                    <a href="#" class="header-action">
+                        <i class="fas fa-user"></i>
+                        <span>Compte</span>
+                    </a>
+                    <a href="#" class="header-action">
+                        <i class="fas fa-heart"></i>
+                        <span>Favoris</span>
+                    </a>
+                    <a href="#" class="header-action">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Panier</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-container">
+                <div class="nav-categories">
+                    <a href="Supermarket.html">Supermarket</a>
+                    <a href="Mode.html">Santé & Beauté</a>
+                    <a href="Maison & Cuisine.html">Maison & Cuisine</a>
+                    <a href="telephone.html">Téléphones</a>
+                    <a href="Ordinateurs.html">Ordinateurs</a>
+                    <a href="Électronique.html">Électronique</a>
+                </div>
+                <div class="nav-promo">
+                    <i class="fas fa-gift"></i> JOURNEE SPECIALE
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="page-header-content">
+                <div>
+                    <h1 class="page-title">Carrières chez Brivaro</h1>
+                    <p class="page-subtitle">Rejoignez notre équipe et façonnez l'avenir du e-commerce</p>
+                </div>
+                <div class="page-header-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Careers Content -->
+        <div class="careers-content">
+            <!-- Intro Section -->
+            <section class="careers-intro">
+                <h2>Travailler chez Brivaro</h2>
+                <p>Chez Brivaro, nous croyons que notre succès est directement lié à notre équipe talentueuse et passionnée. Rejoignez-nous pour faire partie d'une entreprise en pleine croissance qui valorise l'innovation, la collaboration et l'excellence.</p>
+                <p>Nous offrons un environnement de travail dynamique où chaque employé a l'opportunité de se développer professionnellement et personnellement, tout en contribuant à transformer l'expérience d'achat en ligne au Maroc.</p>
+            </section>
+
+            <!-- Values Section -->
+            <section class="values-section">
+                <h2>Nos Valeurs</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="value-title">Collaboration</h3>
+                        <p class="value-description">Nous travaillons ensemble pour atteindre nos objectifs communs et créer une synergie positive.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 class="value-title">Innovation</h3>
+                        <p class="value-description">Nous encourageons la créativité et cherchons constamment à améliorer nos produits et processus.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h3 class="value-title">Excellence</h3>
+                        <p class="value-description">Nous visons l'excellence dans tout ce que nous faisons, des petits détails aux grandes décisions.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3 class="value-title">Passion</h3>
+                        <p class="value-description">Nous sommes passionnés par notre mission et nous nous engageons pleinement dans notre travail.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="value-title">Intégrité</h3>
+                        <p class="value-description">Nous agissons avec honnêteté et transparence dans toutes nos interactions.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="value-title">Développement</h3>
+                        <p class="value-description">Nous investissons dans la croissance et le développement professionnel de nos employés.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Job Openings Section -->
+            <section class="jobs-section">
+                <h2>Postes Ouverts</h2>
+                
+                <div class="jobs-filter">
+                    <button class="filter-btn active">Tous les postes</button>
+                    <button class="filter-btn">Technologie</button>
+                    <button class="filter-btn">Marketing</button>
+                    <button class="filter-btn">Logistique</button>
+                    <button class="filter-btn">Service Client</button>
+                </div>
+                
+                <div class="jobs-grid">
+                    <div class="job-card">
+                        <h3 class="job-title">Développeur Full Stack</h3>
+                        <div class="job-details">
+                            <span class="job-detail"><i class="fas fa-map-marker-alt"></i> Casablanca</span>
+                            <span class="job-detail"><i class="fas fa-briefcase"></i> Temps plein</span>
+                            <span class="job-detail"><i class="fas fa-clock"></i> Publié il y a 2 jours</span>
+                        </div>
+                        <p class="job-description">Nous recherchons un développeur full stack expérimenté pour rejoindre notre équipe technique et contribuer au développement de nos plateformes e-commerce.</p>
+                        <div class="job-actions">
+                            <button class="apply-btn">Postuler</button>
+                            <button class="detail-btn">Détails</button>
+                        </div>
+                    </div>
+                    
+                    <div class="job-card">
+                        <h3 class="job-title">Responsable Marketing Digital</h3>
+                        <div class="job-details">
+                            <span class="job-detail"><i class="fas fa-map-marker-alt"></i> Rabat</span>
+                            <span class="job-detail"><i class="fas fa-briefcase"></i> Temps plein</span>
+                            <span class="job-detail"><i class="fas fa-clock"></i> Publié il y a 5 jours</span>
+                        </div>
+                        <p class="job-description">Rejoignez notre équipe marketing pour développer et mettre en œuvre des stratégies digitales innovantes qui augmentent notre visibilité et engagement.</p>
+                        <div class="job-actions">
+                            <button class="apply-btn">Postuler</button>
+                            <button class="detail-btn">Détails</button>
+                        </div>
+                    </div>
+                    
+                    <div class="job-card">
+                        <h3 class="job-title">Spécialiste Service Client</h3>
+                        <div class="job-details">
+                            <span class="job-detail"><i class="fas fa-map-marker-alt"></i> Marrakech</span>
+                            <span class="job-detail"><i class="fas fa-briefcase"></i> Temps plein</span>
+                            <span class="job-detail"><i class="fas fa-clock"></i> Publié il y a 1 semaine</span>
+                        </div>
+                        <p class="job-description">Nous cherchons un spécialiste du service client passionné pour offrir une expérience exceptionnelle à nos clients et résoudre leurs problèmes efficacement.</p>
+                        <div class="job-actions">
+                            <button class="apply-btn">Postuler</button>
+                            <button class="detail-btn">Détails</button>
+                        </div>
+                    </div>
+                    
+                    <div class="job-card">
+                        <h3 class="job-title">Responsable Logistique</h3>
+                        <div class="job-details">
+                            <span class="job-detail"><i class="fas fa-map-marker-alt"></i> Tanger</span>
+                            <span class="job-detail"><i class="fas fa-briefcase"></i> Temps plein</span>
+                            <span class="job-detail"><i class="fas fa-clock"></i> Publié il y a 3 jours</span>
+                        </div>
+                        <p class="job-description">Supervisez nos opérations logistiques et optimisez nos processus de chaîne d'approvisionnement pour assurer une livraison rapide et efficace.</p>
+                        <div class="job-actions">
+                            <button class="apply-btn">Postuler</button>
+                            <button class="detail-btn">Détails</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Benefits Section -->
+            <section class="benefits-section">
+                <h2>Avantages et Bénéfices</h2>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h3 class="benefit-title">Salaire Compétitif</h3>
+                        <p class="benefit-description">Rémunération attractive avec des reviews annuels</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3 class="benefit-title">Assurance Santé</h3>
+                        <p class="benefit-description">Couverture médicale complète pour vous et votre famille</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="benefit-title">Formation Continue</h3>
+                        <p class="benefit-description">Programmes de développement professionnel et formations</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="benefit-title">Restauration</h3>
+                        <p class="benefit-description">Cantine d'entreprise avec des repas subventionnés</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3 class="benefit-title">Congés Flexibles</h3>
+                        <p class="benefit-description">Politique de congés généreuse et flexible</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3 class="benefit-title">Télétravail</h3>
+                        <p class="benefit-description">Possibilité de travail hybride selon le poste</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <h3 class="benefit-title">Activités Sportives</h3>
+                        <p class="benefit-description">Accès à des installations sportives et activités de bien-être</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3 class="benefit-title">Avantages Employés</h3>
+                        <p class="benefit-description">Réductions sur les produits Brivaro et autres avantages</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Process Section -->
+            <section class="process-section">
+                <h2>Processus de Recrutement</h2>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Candidature en ligne</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Évaluation initiale</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Entretien téléphonique</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <div class="step-text">Entretien en personne</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">5</div>
+                        <div class="step-text">Offre d'emploi</div>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; color: var(--medium-gray);">Notre processus de recrutement est conçu pour être transparent et efficace. Nous nous efforçons de répondre à toutes les candidatures dans un délai de 2 semaines.</p>
+            </section>
+
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h2>Prêt à nous rejoindre?</h2>
+                <p>Découvrez comment vous pouvez contribuer à notre succès et développer votre carrière dans un environnement dynamique et stimulant.</p>
+                <div class="cta-buttons">
+                    <button class="cta-btn">Voir toutes les offres</button>
+                    <button class="cta-btn outline">Envoyer une candidature spontanée</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Besoin D'aide</h4>
+                    <a href="Contactez-nous.html">Contactez-nous</a>
+                    <a href="FAQ.html">FAQ</a>
+                    <a href="Livraison et Paiement.html">Livraison et Paiement</a>
+                    <a href="Retours et Remboursements.html">Retours et Remboursements</a>
+                    <a href="Service Client.html">Service Client</a>
+                </div>
+                <div class="footer-section">
+                    <h4>À propos de Brivaro</h4>
+                    <a href="À propos de nous.html">À propos de nous</a>
+                    <a href="Carrières.html">Carrières</a>
+                    <a href="Brivaro Express.html">Brivaro Express</a>
+                    <a href="Terms and Conditions.html">Terms and Conditions</a>
+                    <a href="Privacy Policy.html">Privacy Policy</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Paiement et Livraison</h4>
+                    <div class="payment-methods">
+                        <i class="fab fa-cc-visa payment-icon"></i>
+                        <i class="fab fa-cc-mastercard payment-icon"></i>
+                        <i class="fab fa-cc-paypal payment-icon"></i>
+                    </div>
+                    <a href="Méthodes de paiement.html">Méthodes de paiement</a>
+                    <a href="Options de livraison.html">Options de livraison</a>
+                    <a href="Suivi de commande.html">Suivi de commande</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Suivez-nous</h4>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633z"/></svg></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Brivaro. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown timer
+        function updateCountdown() {
+            const countdownElements = document.querySelectorAll('.countdown-timer');
+            countdownElements.forEach(el => {
+                // Simulate countdown - in a real implementation, calculate actual time remaining
+                const parts = el.textContent.split(':');
+                let hours = parseInt(parts[0]);
+                let minutes = parseInt(parts[1]);
+                let seconds = parseInt(parts[2]);
+                
+                seconds--;
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                    if (minutes < 0) {
+                        minutes = 59;
+                        hours--;
+                        if (hours < 0) {
+                            hours = 23;
+                        }
+                    }
+                }
+                
+                el.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                // Add pulse animation when time is running low
+                if (hours === 0 && minutes < 5) {
+                    el.classList.add('pulse');
+                } else {
+                    el.classList.remove('pulse');
+                }
+            });
+        }
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        
+        // Product card hover effects
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 6px 15px rgba(0,0,0,0.1)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+            });
+        });
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('MONMAGASIN website loaded successfully');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Options de Livraison - Brivaro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-red: #E91C1C;
+            --primary-orange: #FF6600;
+            --dark-text: #333333;
+            --medium-gray: #666666;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+            --accent-blue: #0066CC;
+            --discount-green: #388E3C;
+            --border-gray: #E0E0E0;
+            --card-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --header-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--light-gray);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+        }
+
+        /* Top Banner */
+        .top-banner {
+            background-color: var(--dark-text);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 0.8rem;
+        }
+
+        .top-banner .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--white);
+            padding: 12px 0;
+            box-shadow: var(--header-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .custom-logo {
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-logo img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .logo-badge {
+            background: var(--primary-red);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 5px;
+            border-radius: 3px;
+            transform: rotate(15deg);
+            margin-left: 5px;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 45px 12px 16px;
+            border: 2px solid var(--border-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-orange);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark-text);
+            font-size: 0.9rem;
+        }
+
+        .header-action i {
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+
+        /* Main Navigation */
+        .main-nav {
+            background-color: var(--white);
+            padding: 12px 0;
+            border-top: 1px solid var(--border-gray);
+            border-bottom: 1px solid var(--border-gray);
+            margin-bottom: 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-categories {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-categories a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-categories a.active {
+            color: var(--primary-orange);
+            font-weight: 700;
+        }
+
+        .nav-categories a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-orange);
+            transition: width 0.3s;
+        }
+
+        .nav-categories a:hover:after, .nav-categories a.active:after {
+            width: 100%;
+        }
+
+        .nav-promo {
+            background: var(--primary-red);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(to right, #4CAF50, #8BC34A);
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .page-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .page-header-icon {
+            font-size: 4rem;
+            opacity: 0.8;
+        }
+
+        /* Delivery Content */
+        .delivery-content {
+            margin-bottom: 40px;
+        }
+
+        .delivery-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .delivery-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .delivery-section h2 {
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .delivery-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-orange);
+        }
+
+        .delivery-section p {
+            margin-bottom: 15px;
+            color: var(--medium-gray);
+            line-height: 1.8;
+        }
+
+        .delivery-section ul, .delivery-section ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+            color: var(--medium-gray);
+        }
+
+        .delivery-section li {
+            margin-bottom: 8px;
+        }
+
+        .highlight-box {
+            background-color: var(--light-gray);
+            border-left: 4px solid var(--primary-orange);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark-text);
+        }
+
+        .last-updated {
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        /* Delivery Options Grid */
+        .delivery-options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .delivery-option-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid var(--primary-orange);
+        }
+
+        .delivery-option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .delivery-option-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary-orange);
+        }
+
+        .delivery-option-title {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--dark-text);
+        }
+
+        .delivery-option-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            margin-bottom: 15px;
+        }
+
+        .delivery-option-description {
+            color: var(--medium-gray);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .delivery-option-features {
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .delivery-option-features li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .delivery-option-features li:before {
+            content: "✓";
+            color: var(--discount-green);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Coverage Map */
+        .coverage-map {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .map-placeholder {
+            background: linear-gradient(to right, #E8F5E9, #C8E6C9);
+            height: 300px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+            color: var(--medium-gray);
+            font-size: 1.1rem;
+        }
+
+        /* Tracking Section */
+        .tracking-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .tracking-steps:before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--border-gray);
+            z-index: 1;
+        }
+
+        .tracking-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        .tracking-step-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--white);
+            border: 2px solid var(--primary-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.5rem;
+            color: var(--primary-orange);
+        }
+
+        .tracking-step-text {
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+        }
+
+        /* Table of Contents */
+        .toc {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .toc h2 {
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            margin-bottom: 10px;
+        }
+
+        .toc-list a {
+            color: var(--medium-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .toc-list a:hover {
+            color: var(--primary-orange);
+        }
+
+        .toc-list a i {
+            margin-right: 10px;
+            color: var(--primary-orange);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--white);
+            padding: 50px 0 0;
+            margin-top: 50px;
+            border-top: 1px solid var(--border-gray);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: var(--dark-text);
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h4:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-orange);
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--medium-gray);
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-orange);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-gray);
+            margin-top: 50px;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .tracking-steps {
+                flex-wrap: wrap;
+            }
+            
+            .tracking-step {
+                flex: 0 0 50%;
+                margin-bottom: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                width: 100%;
+                max-width: none;
+                margin: 10px 0;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-categories {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .page-header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .delivery-section {
+                padding: 25px;
+            }
+            
+            .delivery-options-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tracking-step {
+                flex: 0 0 100%;
+            }
+            
+            .tracking-steps:before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-actions {
+                gap: 15px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .delivery-section {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="container">
+            <span>Francais</span>
+            <span>Brivaro®</span>
+            <span>Lege cle at anal</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="custom-logo">
+                        <img src="B r i v a r o.png" alt="MON MAGASIN">
+                    </div>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Rechercher des produits...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="header-actions">
+                    <a href="#" class="header-action">
+                        <i class="fas fa-user"></i>
+                        <span>Compte</span>
+                    </a>
+                    <a href="#" class="header-action">
+                        <i class="fas fa-heart"></i>
+                        <span>Favoris</span>
+                    </a>
+                    <a href="#" class="header-action">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Panier</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-container">
+                <div class="nav-categories">
+                    <a href="Supermarket.html">Supermarket</a>
+                    <a href="Mode.html">Santé & Beauté</a>
+                    <a href="Maison & Cuisine.html">Maison & Cuisine</a>
+                    <a href="telephone.html">Téléphones</a>
+                    <a href="Ordinateurs.html">Ordinateurs</a>
+                    <a href="Électronique.html">Électronique</a>
+                </div>
+                <div class="nav-promo">
+                    <i class="fas fa-gift"></i> JOURNEE SPECIALE
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="page-header-content">
+                <div>
+                    <h1 class="page-title">Options de Livraison</h1>
+                    <p class="page-subtitle">Des solutions rapides et fiables pour recevoir vos commandes</p>
+                </div>
+                <div class="page-header-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Delivery Content -->
+        <div class="delivery-content">
+            <!-- Table of Contents -->
+            <div class="toc">
+                <h2>Options Disponibles</h2>
+                <ul class="toc-list">
+                    <li><a href="#standard"><i class="fas fa-chevron-right"></i> Livraison Standard</a></li>
+                    <li><a href="#express"><i class="fas fa-chevron-right"></i> Livraison Express</a></li>
+                    <li><a href="#point-relais"><i class="fas fa-chevron-right"></i> Point Relais</a></li>
+                    <li><a href="#drive"><i class="fas fa-chevron-right"></i> Retrait Drive</a></li>
+                    <li><a href="#international"><i class="fas fa-chevron-right"></i> Livraison Internationale</a></li>
+                    <li><a href="#suivi"><i class="fas fa-chevron-right"></i> Suivi de Commande</a></li>
+                    <li><a href="#faq"><i class="fas fa-chevron-right"></i> FAQ Livraison</a></li>
+                </ul>
+            </div>
+
+            <!-- Livraison Standard -->
+            <section class="delivery-section" id="standard">
+                <h2>Livraison Standard</h2>
+                <div class="article">
+                    <p>Notre option de livraison standard offre un équilibre parfait entre rapidité et coût. Idéale pour les commandes non urgentes, cette option vous permet de recevoir vos articles en toute sécurité dans un délai raisonnable.</p>
+                    
+                    <div class="delivery-options-grid">
+                        <div class="delivery-option-card">
+                            <div class="delivery-option-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <h3 class="delivery-option-title">Standard</h3>
+                            <div class="delivery-option-price">29 MAD</div>
+                            <p class="delivery-option-description">Livraison en 3-5 jours ouvrables</p>
+                            <ul class="delivery-option-features">
+                                <li>Suivi de colis basic</li>
+                                <li>Livraison à domicile</li>
+                                <li>Heures de livraison: 8h-18h</li>
+                                <li>Emballage standard</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <p>La livraison standard est gratuite pour toutes les commandes supérieures à 300 MAD. Les commandes passées avant 14h sont expédiées le jour même.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Livraison Express -->
+            <section class="delivery-section" id="express">
+                <h2>Livraison Express</h2>
+                <div class="article">
+                    <p>Besoin de recevoir votre commande rapidement? Notre service de livraison express vous garantit une réception en 24 à 48 heures selon votre localisation.</p>
+                    
+                    <div class="delivery-options-grid">
+                        <div class="delivery-option-card">
+                            <div class="delivery-option-icon">
+                                <i class="fas fa-shipping-fast"></i>
+                            </div>
+                            <h3 class="delivery-option-title">Express</h3>
+                            <div class="delivery-option-price">59 MAD</div>
+                            <p class="delivery-option-description">Livraison en 24-48 heures</p>
+                            <ul class="delivery-option-features">
+                                <li>Suivi de colis en temps réel</li>
+                                <li>Livraison prioritaire</li>
+                                <li>Fenêtre de livraison de 2 heures</li>
+                                <li>Emballage renforcé</li>
+                                <li>Service client dédié</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="delivery-option-card">
+                            <div class="delivery-option-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h3 class="delivery-option-title">Premium</h3>
+                            <div class="delivery-option-price">99 MAD</div>
+                            <p class="delivery-option-description">Livraison le jour même</p>
+                            <ul class="delivery-option-features">
+                                <li>Suivi GPS en direct</li>
+                                <li>Livraison avant 20h</li>
+                                <li>Fenêtre de livraison d'1 heure</li>
+                                <li>Emballage premium</li>
+                                <li>Service client 24/7</li>
+                                <li>Installation optionnelle</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <p>Pour bénéficier de la livraison le jour même, votre commande doit être passée avant 12h. Disponible uniquement dans les zones métropolitaines.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Point Relais -->
+            <section class="delivery-section" id="point-relais">
+                <h2>Point Relais</h2>
+                <div class="article">
+                    <p>Choisissez la livraison en point relais pour plus de flexibilité. Réceptionnez votre colis à l'endroit et au moment qui vous conviennent le mieux parmi nos 1200 points de retrait partenaires.</p>
+                    
+                    <div class="delivery-options-grid">
+                        <div class="delivery-option-card">
+                            <div class="delivery-option-icon">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <h3 class="delivery-option-title">Point Relais</h3>
+                            <div class="delivery-option-price">19 MAD</div>
+                            <p class="delivery-option-description">Retrait sous 2-4 jours</p>
+                            <ul class="delivery-option-features">
+                                <li>Gratuit dès 150 MAD d'achat</li>
+                                <li>Conservation pendant 7 jours</li>
+                                <li>1200 points disponibles</li>
+                                <li>Horaires étendus</li>
+                                <li>Alertes SMS et email</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="coverage-map">
+                        <h3>Carte de nos points relais</h3>
+                        <p>Retrouvez le point de retrait le plus proche de chez vous</p>
+                        <div class="map-placeholder">
+                            <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-right: 15px;"></i>
+                            Carte interactive des points relais Brivaro
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Retrait Drive -->
+            <section class="delivery-section" id="drive">
+                <h2>Retrait Drive</h2>
+                <div class="article">
+                    <p>Commandez en ligne et retirez vos articles en magasin sans attente. Notre service drive vous permet de récupérer votre commande en moins de 2 heures.</p>
+                    
+                    <div class="delivery-options-grid">
+                        <div class="delivery-option-card">
+                            <div class="delivery-option-icon">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <h3 class="delivery-option-title">Retrait Drive</h3>
+                            <div class="delivery-option-price">GRATUIT</div>
+                            <p class="delivery-option-description">Prêt en 2 heures</p>
+                            <ul class="delivery-option-features">
+                                <li>Service gratuit</li>
+                                <li>Préparation en 2 heures</li>
+                                <li>25 magasins participants</li>
+                                <li>Stationnement dédié</li>
+                                <li>Pas de contact nécessaire</li>
+                                <li>Retrait 7j/7 aux heures d'ouverture</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <p>Vous recevrez un SMS lorsque votre commande sera prête. Présentez-vous au drive aux heures d'ouverture du magasin avec votre pièce d'identité et le numéro de commande.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Livraison Internationale -->
+            <section class="delivery-section" id="international">
+                <h2>Livraison Internationale</h2>
+                <div class="article">
+                    <p>Brivaro livre désormais dans plus de 30 pays à travers le monde. Découvrez nos options d'expédition internationale pour recevoir vos produits partout où vous êtes.</p>
+                    
+                    <div class="delivery-options-grid">
+                        <div class="delivery-option-card">
+                            <div class="delivery-option-icon">
+                                <i class="fas fa-globe-europe"></i>
+                            </div>
+                            <h3 class="delivery-option-title">International Standard</h3>
+                            <div class="delivery-option-price">199 MAD</div>
+                            <p class="delivery-option-description">7-14 jours ouvrables</p>
+                            <ul class="delivery-option-features">
+                                <li>Suivi de colis international</li>
+                                <li>Frais de douane inclus</li>
+                                <li>Livraison porte-à-porte</li>
+                                <li>Assurance incluse</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="delivery-option-card">
+                            <div class="delivery-option-icon">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <h3 class="delivery-option-title">International Express</h3>
+                            <div class="delivery-option-price">349 MAD</div>
+                            <p class="delivery-option-description">3-5 jours ouvrables</p>
+                            <ul class="delivery-option-features">
+                                <li>Suivi GPS international</li>
+                                <li>Frais de douane inclus</li>
+                                <li>Livraison express</li>
+                                <li>Assurance premium</li>
+                                <li>Service client multilingue</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <p>Les délais de livraison internationaux peuvent varier en fonction des formalités douanières. Certaines restrictions s'appliquent selon les pays et les produits.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Suivi de Commande -->
+            <section class="delivery-section" id="suivi">
+                <h2>Suivi de Commande</h2>
+                <div class="article">
+                    <p>Restez informé de l'état de votre commande grâce à notre système de suivi en temps réel. De la préparation à la livraison, nous vous tenons informé à chaque étape.</p>
+                    
+                    <div class="tracking-steps">
+                        <div class="tracking-step">
+                            <div class="tracking-step-icon">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <div class="tracking-step-text">
+                                Commande<br>confirmée
+                            </div>
+                        </div>
+                        
+                        <div class="tracking-step">
+                            <div class="tracking-step-icon">
+                                <i class="fas fa-box-open"></i>
+                            </div>
+                            <div class="tracking-step-text">
+                                Préparation<br>en cours
+                            </div>
+                        </div>
+                        
+                        <div class="tracking-step">
+                            <div class="tracking-step-icon">
+                                <i class="fas fa-warehouse"></i>
+                            </div>
+                            <div class="tracking-step-text">
+                                Expédiée<br>de l'entrepôt
+                            </div>
+                        </div>
+                        
+                        <div class="tracking-step">
+                            <div class="tracking-step-icon">
+                                <i class="fas fa-shipping-fast"></i>
+                            </div>
+                            <div class="tracking-step-text">
+                                En cours<br>de livraison
+                            </div>
+                        </div>
+                        
+                        <div class="tracking-step">
+                            <div class="tracking-step-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="tracking-step-text">
+                                Livrée<br>à domicile
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p>Pour suivre votre commande, rendez-vous dans la section "Mes commandes" de votre compte client ou utilisez le numéro de suivi qui vous a été envoyé par email.</p>
+                    
+                    <div class="highlight-box">
+                        <p>Vous recevrez des notifications par email et SMS aux étapes clés de votre livraison. Pour les livraisons express, vous recevrez un appel du livreur 30 minutes avant son arrivée.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Livraison -->
+            <section class="delivery-section" id="faq">
+                <h2>FAQ Livraison</h2>
+                <div class="article">
+                    <h3 class="article-title">Que faire si je suis absent lors de la livraison ?</h3>
+                    <p>En cas d'absence, le livreur tentera de vous contacter et laissera un avis de passage. Vous pourrez alors reprogrammer la livraison ou récupérer votre colis au point relais le plus proche selon les options disponibles.</p>
+                    
+                    <h3 class="article-title">Puis-je modifier l'adresse de livraison après avoir passé commande ?</h3>
+                    <p>Oui, tant que votre commande n'a pas été expédiée. Contactez notre service client dans les plus brefs délais pour modifier l'adresse de livraison.</p>
+                    
+                    <h3 class="article-title">Comment sont emballés mes produits ?</h3>
+                    <p>Tous nos produits sont emballés avec soin dans des cartons adaptés à leur taille et fragilité. Les articles fragiles bénéficient d'une protection supplémentaire (bulles, mousse, etc.).</p>
+                    
+                    <h3 class="article-title">Proposez-vous la livraison le dimanche ?</h3>
+                    <p>Oui, la livraison le dimanche est disponible en option pour la livraison express dans certaines zones métropolitaines. Des frais supplémentaires peuvent s'appliquer.</p>
+                    
+                    <h3 class="article-title">Que faire en cas de colis endommagé ?</h3>
+                    <p>Si votre colis arrive endommagé, refusez la livraison ou notez vos réserves sur le bon de livraison. Contactez ensuite immédiatement notre service client pour organiser un remplacement.</p>
+                </div>
+            </section>
+
+            <!-- Assistance -->
+            <section class="delivery-section">
+                <h2>Assistance Livraison</h2>
+                <div class="article">
+                    <p>Notre équipe logistique est à votre disposition pour toute question concernant la livraison de vos commandes :</p>
+                    
+                    <ul>
+                        <li><strong>Email :</strong> support-livraison@brivaro.ma</li>
+                        <li><strong>Téléphone :</strong> +212 5 22 45 78 91 (du lundi au samedi, 8h-20h)</li>
+                        <li><strong>Chat en direct :</strong> Disponible sur notre site aux heures de bureau</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <p>Pour une assistance plus rapide, ayez sous la main votre numéro de commande lorsque vous nous contactez.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Last Updated -->
+            <div class="last-updated">
+                Dernière mise à jour: 1 janvier 2025
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Besoin D'aide</h4>
+                    <a href="Contactez-nous.html">Contactez-nous</a>
+                    <a href="FAQ.html">FAQ</a>
+                    <a href="Livraison et Paiement.html">Livraison et Paiement</a>
+                    <a href="Retours et Remboursements.html">Retours et Remboursements</a>
+                    <a href="Service Client.html">Service Client</a>
+                </div>
+                <div class="footer-section">
+                    <h4>À propos de Brivaro</h4>
+                    <a href="À propos de nous.html">À propos de nous</a>
+                    <a href="Carrières.html">Carrières</a>
+                    <a href="Brivaro Express.html">Brivaro Express</a>
+                    <a href="Terms and Conditions.html">Terms and Conditions</a>
+                    <a href="Privacy Policy.html">Privacy Policy</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Paiement et Livraison</h4>
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        <i class="fab fa-cc-visa" style="font-size: 1.8rem; color: #555;"></i>
+                        <i class="fab fa-cc-mastercard" style="font-size: 1.8rem; color: #555;"></i>
+                        <i class="fab fa-cc-paypal" style="font-size: 1.8rem; color: #555;"></i>
+                    </div>
+                    <a href="Méthodes de paiement.html">Méthodes de paiement</a>
+                    <a href="Options de livraison.html">Options de livraison</a>
+                    <a href="Suivi de commande.html">Suivi de commande</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Suivez-nous</h4>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633z"/></svg></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Brivaro. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for table of contents links
+        document.querySelectorAll('.toc-list a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 20,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Highlight current section in view
+        const sections = document.querySelectorAll('.delivery-section');
+        const navLinks = document.querySelectorAll('.toc-list a');
+        
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
